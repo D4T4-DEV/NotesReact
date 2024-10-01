@@ -1,5 +1,17 @@
-import { ColorNotes } from "../../Styles/Variables_Style";
-
+// Colores de las notas 
+export const ColorNotes: string[] =
+    [
+        '#f7941d',
+        '#ffeb3b',
+        '#bc8dbf',
+        '#abd474',
+        '#f49abf',
+        '#6dd0f7',
+        '#ECEE81',
+        '#8DDFCB',
+        '#82A0D8',
+        '#EDB7ED',
+    ];
 
 // Conjunto de datos (colores), usados para almacenarse para evitar la repeticion
 const coloresUsados: Set<string> = new Set();
