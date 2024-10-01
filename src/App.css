@@ -1,6 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@100..900&display=swap');
+
 
 * {
-  font-family: "Noto Sans", system-ui;
+  font-family: 'Noto Sans', sans-serif;
+  color: #000;
+}
+
+body{
+  font-family: 'Noto Sans', sans-serif;
   color: #000;
 }

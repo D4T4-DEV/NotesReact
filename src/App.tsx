@@ -1,8 +1,12 @@
 import React from 'react'
+import AppBarComponent from './Components/AppBarComponent'
 
 function App() {
   return (
-    <div>App</div>
+    <div>
+      {/* Componente de AppBar */}
+      <AppBarComponent/>
+    </div>
   )
 }
 
