@@ -17,7 +17,6 @@ export const ColorNotes: string[] =
 const coloresUsados: Set<string> = new Set();
 
 
-
 // Funcion para obtener un color aleatorio y evitar la repeticion 
 export default function getColorNoteRamdon(arregloColores?: string[]): string | undefined {
 
