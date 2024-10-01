@@ -1,4 +1,3 @@
-import React from 'react'
 import AppBarComponent from './Components/AppBarComponent'
 
 function App() {
@@ -6,6 +5,7 @@ function App() {
     <div>
       {/* Componente de AppBar */}
       <AppBarComponent/>
+      
     </div>
   )
 }
