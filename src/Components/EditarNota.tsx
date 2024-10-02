@@ -171,7 +171,7 @@ const EditItem: React.FC<EditItemProps> = ({ id, onClose, containerId }) => {
                         <Button onClick={isEditing ? handleOpenConfirmation : handleActivateModify} style={{ fontFamily: 'Noto Sans, sans-serif', fontStyle: 'normal' }} title={isEditing ? 'Guardar' : 'Modificar'}>
                             {isEditing ? 'Guardar' : 'Modificar'}
                         </Button>
-                        <Button onClick={handleClose} title="Volver">Volver</Button>
+                        <Button onClick={handleClose} style={{ fontFamily: 'Noto Sans, sans-serif', fontStyle: 'normal' }} title="Volver">Volver</Button>
                     </Box>
                 </Box>
             </Modal>

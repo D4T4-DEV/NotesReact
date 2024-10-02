@@ -90,12 +90,19 @@ export default function ShowNote({ open, onClose, identifyNote }: ShowNoteProps)
                             fontSize: 20,
                             fontWeight: 'bolder',
                             marginLeft: '25px'
-                        }}>
+                        }}
+                        title='Título de la nota'
+                        >
                             {noteData.title}
                         </Typography>
                     </Box>
 
                     <Box sx={{
+                        wordBreak: 'break-word',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        display: '-webkit-box',
+                        WebkitBoxOrient: 'vertical',
                         mb: 2,
                         height: '325px',
                         maxHeight: "325px",
@@ -113,7 +120,9 @@ export default function ShowNote({ open, onClose, identifyNote }: ShowNoteProps)
                         '&::-webkit-scrollbar-track': {
                             backgroundColor: 'transparent',
                         },
-                    }}>
+                    }}
+                    title='Mensaje de la nota'
+                    >
                         <Typography sx={{
                             fontFamily: 'Noto Sans, sans-serif',
                             marginLeft: '25px',
@@ -124,8 +133,8 @@ export default function ShowNote({ open, onClose, identifyNote }: ShowNoteProps)
                         </Typography>
                     </Box>
 
-                    <Box sx={{ mt: 2, display: 'flex', justifyContent: 'flex-end' }}>
-                        <Button sx={{ fontFamily: 'Noto Sans, sans-serif' }} onClick={handleClose} title="Cerrar mostrar nota">Cerrar</Button>
+                    <Box sx={{ mt: 4, display: 'flex', justifyContent: 'flex-end' }}>
+                        <Button sx={{ fontFamily: 'Noto Sans, sans-serif', backgroundColor: '#FFF' }} onClick={handleClose} title="Cerrar mostrar nota">Cerrar</Button>
                     </Box>
                 </Box>
             </Modal>
