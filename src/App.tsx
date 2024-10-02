@@ -5,6 +5,8 @@ import { useState } from 'react';
 import AddItem from './Components/AddItem';
 import Container from './Components/ContenedorDeNotas';
 import Card from './Components/Nota';
+import AddContainer from './Components/AñadirContenedor';
+import generateUUID from './Functions/Identificadores/generarUUID';
 
 function App() {
 
@@ -30,38 +32,38 @@ function App() {
   const handleDragEnd = (event: any) => {
     const { active, over } = event;
     if (!over) return;
-
+  
     setActiveContainerId(null);
-
+  
     const activeType = active.data.current?.type;
     const overType = over.data.current?.type;
-
+  
+    // Lógica para mover un ítem entre contenedores existentes
     if (activeType === 'item' && overType === 'container') {
       const sourceIndex = containers.findIndex((container) =>
         container.items.some(item => item.id === active.id)
       );
       const destinationIndex = containers.findIndex(container => container.id === over.id);
-
+  
       if (sourceIndex !== -1 && destinationIndex !== -1 && sourceIndex !== destinationIndex) {
-        // Uso del contexto para mover el item entre contenedores
         dispatch({
           type: 'MOVE_ITEM_BETWEEN_CONTAINERS',
           payload: { sourceIndex, destinationIndex, itemId: active.id },
         });
       }
     }
-
+  
+    // Lógica para mover un ítem dentro del mismo contenedor
     if (activeType === 'item' && overType === 'item') {
       const containerIndex = containers.findIndex(container =>
         container.items.some(item => item.id === active.id)
       );
-
+  
       if (containerIndex !== -1) {
         const activeIndex = containers[containerIndex].items.findIndex(item => item.id === active.id);
         const overIndex = containers[containerIndex].items.findIndex(item => item.id === over.id);
-
+  
         if (activeIndex !== overIndex) {
-          // Uso del contexto para mover el item en el mismo contenedor
           dispatch({
             type: 'MOVE_ITEM_WITHIN_CONTAINER',
             payload: { containerIndex, activeIndex, overIndex },
@@ -69,8 +71,38 @@ function App() {
         }
       }
     }
+  
+    // Lógica para mover un ítem a un nuevo contenedor creado en AddContainer
+    if (activeType === 'item' && overType === 'add-container') {
+      const sourceContainer = containers.find((container) =>
+        container.items.some(item => item.id === active.id)
+      );
+  
+      if (sourceContainer) {
+        const movedItem = sourceContainer.items.find(item => item.id === active.id);
+  
+        if (movedItem) {
+          // Crear nuevo contenedor
+          const newContainer = {
+            id: generateUUID(),
+            items: [movedItem], // Agregar el ítem al nuevo contenedor
+          };
+  
+          // Despachar acción para añadir nuevo contenedor
+          dispatch({
+            type: 'ADD_CONTAINER',
+            payload: newContainer,
+          });
+  
+          // Remover el ítem del contenedor original
+          dispatch({
+            type: 'REMOVE_ITEM',
+            payload: { containerId: sourceContainer.id, itemId: active.id },
+          });
+        }
+      }
+    }
   };
-
   // Funcion para saber el tipo de item que se tiene cuando se suelta otro
   const handleDragOver = (event: any) => {
     const { over } = event;
@@ -100,6 +132,8 @@ function App() {
           <div style={{display: 'flex', justifyContent: 'flex-end'}}>
             <AddItem containerId={'father-items-god'} />
           </div>
+
+          <AddContainer /> {/* Añadir el componente de añadir contenedores */}
 
           {containers.map((container) => (
           <Container
