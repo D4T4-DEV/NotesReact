@@ -143,10 +143,10 @@ const AddItem: React.FC<AddItemProps> = ({ containerId }) => {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleOpenConfirmation} color="primary" sx={{ marginBottom: 1, fontFamily: '"Noto Sans", sans-serif', fontStyle: 'normal', }}>
+          <Button onClick={handleOpenConfirmation} color="primary" sx={{ marginBottom: 1, fontFamily: '"Noto Sans", sans-serif', fontStyle: 'normal', }} title='Añadir nota'>
             Añadir nota
           </Button>
-          <Button onClick={handleCloseForm} color="primary" sx={{ marginBottom: 1, marginRight: 2, fontFamily: '"Noto Sans", sans-serif', fontStyle: 'normal', }}>
+          <Button onClick={handleCloseForm} color="primary" sx={{ marginBottom: 1, marginRight: 2, fontFamily: '"Noto Sans", sans-serif', fontStyle: 'normal', }} title='No añadir nota'>
             Cancelar
           </Button>
         </DialogActions>
