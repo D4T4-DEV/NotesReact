@@ -73,18 +73,19 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
     React.isValidElement<CardProps>(child) ? React.cloneElement(child, { isModalOpen }) : child
   );
 
+  // Estilos del contenedor padre de la aplicacion
   const fatherContainerStyle: React.CSSProperties = {
     border: isActive ? '2px solid blue' : 'none',
     padding: '20px',
     margin: '15px',
-    maxWidth: 2000,
-    width: '100%',
+    width: '97%',
     position: 'relative',
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap',
   };
 
+    // Estilos de los otros contenedores de la aplicacion
   const defaultContainerStyle: React.CSSProperties = {
     border: isActive ? '2px solid blue' : 'none',
     padding: '10px',
@@ -121,17 +122,17 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
     <div ref={setNodeRef} style={containerStyle} className="container">
       {id !== 'father-items-god' && (
         <>
-          <button onClick={openModal}>Mostrar en Modal</button>
+          <button onClick={openModal}>Mostrar las notas</button>
           <button onClick={openDeleteConfirm}>Eliminar contenedor</button>
 
           <Dialog open={isModalOpen} onClose={closeModal} fullWidth maxWidth="md">
             <DialogTitle>Bienvenido a tu contenedor de notas!</DialogTitle>
             <DialogContent>
               <button onClick={toggleSortingStrategy}>
-                Cambiar a {isHorizontal ? 'Reordenamiento vertical' : 'Reordenamiento horizontal'}
+                Cambiar a {isHorizontal ? 'Reordenamiento de notas de manera vertical' : 'Reordenamiento de manera horizontal'}
               </button>
               {items.length === 0 ? (
-                <div>No hay ítems, arrastra unos o borra esto 👻📝</div>
+                <div>No hay ítems, arrastra las notas o borrame 👻📝</div>
               ) : (
                 <SortableContext items={items.map((item) => item.id)} strategy={sortingStrategy}>
                   <div
@@ -175,7 +176,7 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
 
       <SortableContext items={items.map((item) => item.id)} strategy={sortingStrategy}>
         <div className="card-list" style={{ position: 'relative', display: 'flex', flexDirection: 'row', flexWrap: 'wrap', gap: '10px' }}>
-          {id === 'father-items-god' && items.length === 0 && <div className="empty">Aquí se mostrarán los items principales</div>}
+          {id === 'father-items-god' && items.length === 0 && <div className="empty">Aquí se mostrarán los items principales, tranquilo que me voy y vuelvo 👻🥸</div>}
           {items.length === 0 && id !== 'father-items-god' ? (
             <div className="empty">Suelta los items aquí</div>
           ) : id === 'father-items-god' ? (
