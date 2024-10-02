@@ -22,7 +22,6 @@ const style = {
     lg: '300px'
   },
   bgcolor: 'background.paper',
-  border: '2px solid #dde9ec',
   borderRadius: 2,
   boxShadow: 24,
   pt: 2,
