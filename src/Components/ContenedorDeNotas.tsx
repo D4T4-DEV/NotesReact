@@ -126,7 +126,34 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
       {id !== 'father-items-god' && (
         <>
           <button onClick={openModal}>Mostrar las notas</button>
-          <button onClick={openDeleteConfirm}>Eliminar contenedor</button>
+
+
+
+          {/* <button onClick={openDeleteConfirm}>Eliminar contenedor</button> */}
+
+          {/* Boton de borrar */}
+          <Button
+            onClick={openDeleteConfirm}
+            variant="contained"
+            size="small"
+            sx={{
+              fontFamily: 'Noto Sans, sans-serif',
+              fontStyle: 'normal',
+              width: 18,
+              height: 18,
+              minWidth: 0,
+              borderRadius: "50%",
+              padding: 0,
+              backgroundColor: "#FFF",
+            }}
+            title="Delete note"
+          >
+            <span className="material-symbols-outlined" style={{ fontSize: 18, color: "#000" }}>
+              delete
+            </span>
+          </Button>
+
+
 
           {/* Mensaje que muestra en el contenedor de notas y como se representa en este  */}
           <Dialog open={isModalOpen} onClose={closeModal} fullWidth maxWidth="md">
