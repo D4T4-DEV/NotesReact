@@ -49,9 +49,9 @@ export default function ShowNote({ open, onClose, identifyNote }: ShowNoteProps)
                 const currentNote = container.items.find((note) => note.id === identifyNote);
                 if (currentNote) {
                     setNoteData({
-                        title: currentNote.title || 'Untitled',
-                        note: currentNote.message || 'No data',
-                        colorNote: currentNote.color || 'red',
+                        title: currentNote.title || 'Sin título',
+                        note: currentNote.message || 'No tiene ningún mensaje',
+                        colorNote: currentNote.color || '',
                     });
                 }
             });
@@ -74,7 +74,7 @@ export default function ShowNote({ open, onClose, identifyNote }: ShowNoteProps)
                 <Box sx={{ ...style, backgroundColor: noteData.colorNote }}>
                     <Box sx={{ mb: 2, textAlign: 'center' }}>
                         <Typography id="modal-modal-title" variant="h6" component="h2" sx={{ fontFamily: 'Noto Sans, sans-serif' }}>
-                            Your note ❤️
+                            Aqui esta tu nota ❤️
                         </Typography>
                     </Box>
 

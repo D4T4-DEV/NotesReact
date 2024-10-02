@@ -91,14 +91,13 @@ const Card: React.FC<CardProps> = ({ id, title, message, type, colorItem, contai
                 style={style}
                 {...attributes}
                 {...listeners}
-
             >
-                <CardContent sx={{ cursor: 'grab' }}>
+                <CardContent sx={{ cursor: 'grab' }} title='Nota, para abrir la nota completa, dame dos clicks o bien crea un contenedor y arrastrame a el para que me guarde!'>
                     <Typography
                         variant="h6"
                         sx={{ fontWeight: 'bold', fontFamily: 'Noto Sans, sans-serif', fontStyle: 'normal', fontSize: 12 }}
                     >
-                        {truncateText(title, 15) || 'Sin titulo'}
+                        {truncateText(title, 15) || 'Sin título'}
                     </Typography>
                     <Typography
                         variant="body2"
@@ -115,7 +114,7 @@ const Card: React.FC<CardProps> = ({ id, title, message, type, colorItem, contai
                             fontSize: 10,
                         }}
                     >
-                        {truncateText(message, 500) || 'No tiene ningun mensaje'}
+                        {truncateText(message, 500) || 'No tiene ningún mensaje'}
                     </Typography>
                 </CardContent>
 

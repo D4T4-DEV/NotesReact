@@ -66,7 +66,7 @@ const AddItem: React.FC<AddItemProps> = ({ containerId }) => {
 
 
   return (
-    <div>
+    <>
       {/* Boton que despliega el modal */}
       <Button
         onClick={handleOpenForm}
@@ -91,6 +91,7 @@ const AddItem: React.FC<AddItemProps> = ({ containerId }) => {
         <DialogTitle sx={{ fontFamily: 'Noto Sans, sans-serif', fontStyle: 'normal', textAlign: 'center' }}>Añadir una nueva nota</DialogTitle>
         <DialogContent>
           <TextField
+            title='Titulo de la nota'
             sx={{
               '& .MuiInputBase-root': {
                 fontFamily: 'Noto Sans, sans-serif',
@@ -140,6 +141,7 @@ const AddItem: React.FC<AddItemProps> = ({ containerId }) => {
             value={formData.message}
             onChange={handleChange}
             helperText={`${formData.message.length} caracteres`}
+            title='Mensaje de la nota'
           />
         </DialogContent>
         <DialogActions>
@@ -160,7 +162,7 @@ const AddItem: React.FC<AddItemProps> = ({ containerId }) => {
         title=""
         description="¿Estás seguro de que deseas añadir esta nota?"
       />
-    </div>
+    </>
   );
 };
 

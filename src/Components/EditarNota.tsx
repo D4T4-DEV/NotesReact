@@ -39,8 +39,8 @@ const EditItem: React.FC<EditItemProps> = ({ id, onClose, containerId }) => {
 
     // Inicializar estado del formulario con los valores del contexto
     const [formData, setFormData] = useState({
-        title: note?.title || 'Untitled',
-        note: note?.message || 'No data',
+        title: note?.title || '',
+        note: note?.message || '',
     });
 
     const [isEditing, setEdit] = useState(false);
