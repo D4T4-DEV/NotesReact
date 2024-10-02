@@ -75,8 +75,8 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
 
   // Estilos del contenedor padre de la aplicacion
   const fatherContainerStyle: React.CSSProperties = {
-    border: isActive ? '2px solid blue' : 'none',
-    backgroundColor: isActive ? 'rgba(135, 206, 235, 0.7)' : 'transparent',
+    border: isActive ? '2px dashed blue' : 'none',
+    backgroundColor: isActive ? 'rgba(135, 206, 235, 0.5)' : 'transparent',
     padding: '20px',
     margin: '15px',
     width: '96.5%',
@@ -88,7 +88,7 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
 
     // Estilos de los otros contenedores de la aplicacion
   const defaultContainerStyle: React.CSSProperties = {
-    border: isActive ? '2px solid blue' : 'none',
+    border: isActive ? '2px dashed blue' : 'none',
     padding: '10px',
     margin: '10px',
     backgroundColor: isActive ? 'rgba(135, 206, 235, 0.7)' : 'transparent',
