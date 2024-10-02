@@ -7,11 +7,29 @@ import Container from './Components/ContenedorDeNotas';
 import Card from './Components/Nota';
 import AddContainer from './Components/AñadirContenedor';
 import generateUUID from './Functions/Identificadores/generarUUID';
+import ConfirmationModal from './Components/ModalConfirmar';
+
+
+interface Item {
+  id: string;
+  title: string;
+  message: string;
+  color?: string;
+}
 
 function App() {
 
   // Uso de un estado para saber el contenedor que se esta movimiento un item
   const [activeContainerId, setActiveContainerId] = useState<string | null>(null);
+
+  // Item a mover
+  const [itemToMove, setItemToMove] = useState<Item | null>(null);
+
+  // Almacena el contenedor original
+  const [sourceContainerId, setSourceContainerId] = useState<string | null>(null);
+
+  // Utilizado para abrir el modal
+  const [openModal, setOpenModal] = useState(false);
 
   // Uso del contexto
   const { containers, dispatch } = useContainerContext();
@@ -32,19 +50,19 @@ function App() {
   const handleDragEnd = (event: any) => {
     const { active, over } = event;
     if (!over) return;
-  
+
     setActiveContainerId(null);
-  
+
     const activeType = active.data.current?.type;
     const overType = over.data.current?.type;
-  
+
     // Lógica para mover un ítem entre contenedores existentes
     if (activeType === 'item' && overType === 'container') {
       const sourceIndex = containers.findIndex((container) =>
         container.items.some(item => item.id === active.id)
       );
       const destinationIndex = containers.findIndex(container => container.id === over.id);
-  
+
       if (sourceIndex !== -1 && destinationIndex !== -1 && sourceIndex !== destinationIndex) {
         dispatch({
           type: 'MOVE_ITEM_BETWEEN_CONTAINERS',
@@ -52,17 +70,17 @@ function App() {
         });
       }
     }
-  
+
     // Lógica para mover un ítem dentro del mismo contenedor
     if (activeType === 'item' && overType === 'item') {
       const containerIndex = containers.findIndex(container =>
         container.items.some(item => item.id === active.id)
       );
-  
+
       if (containerIndex !== -1) {
         const activeIndex = containers[containerIndex].items.findIndex(item => item.id === active.id);
         const overIndex = containers[containerIndex].items.findIndex(item => item.id === over.id);
-  
+
         if (activeIndex !== overIndex) {
           dispatch({
             type: 'MOVE_ITEM_WITHIN_CONTAINER',
@@ -71,38 +89,60 @@ function App() {
         }
       }
     }
-  
+
     // Lógica para mover un ítem a un nuevo contenedor creado en AddContainer
     if (activeType === 'item' && overType === 'add-container') {
       const sourceContainer = containers.find((container) =>
         container.items.some(item => item.id === active.id)
       );
-  
+
       if (sourceContainer) {
         const movedItem = sourceContainer.items.find(item => item.id === active.id);
-  
+
         if (movedItem) {
-          // Crear nuevo contenedor
-          const newContainer = {
-            id: generateUUID(),
-            items: [movedItem], // Agregar el ítem al nuevo contenedor
-          };
-  
-          // Despachar acción para añadir nuevo contenedor
-          dispatch({
-            type: 'ADD_CONTAINER',
-            payload: newContainer,
-          });
-  
-          // Remover el ítem del contenedor original
-          dispatch({
-            type: 'REMOVE_ITEM',
-            payload: { containerId: sourceContainer.id, itemId: active.id },
-          });
+          // Almacenar el ítem y el contenedor original, y abre  el modal
+          setItemToMove(movedItem);
+          setSourceContainerId(sourceContainer.id);
+          setOpenModal(true);
         }
       }
     }
   };
+
+  // Función que se ejecuta si el usuario confirma la acción
+  const handleConfirmMove = () => {
+    if (itemToMove && sourceContainerId) {
+      // Crear nuevo contenedor
+      const newContainer = {
+        id: generateUUID(),
+        items: [itemToMove], // Agregar el ítem al nuevo contenedor
+      };
+
+      dispatch({
+        type: 'ADD_CONTAINER',
+        payload: newContainer,
+      });
+
+      // Remover el ítem del contenedor original
+      dispatch({
+        type: 'REMOVE_ITEM',
+        payload: { containerId: sourceContainerId, itemId: itemToMove.id },
+      });
+
+      // Cerrar el modal y limpiar estados
+      setOpenModal(false);
+      setItemToMove(null);
+      setSourceContainerId(null);
+    }
+  };
+
+  // Función que se ejecuta si el usuario cancela la acción esto viniendo de añadir un nuevo contenedor
+  const handleCancelMove = () => {
+    setOpenModal(false); // Cierra el modal sin mover el ítem
+    setItemToMove(null); // Limpia el ítem a mover
+    setSourceContainerId(null); // Limpia el contenedor de origen
+  };
+
   // Funcion para saber el tipo de item que se tiene cuando se suelta otro
   const handleDragOver = (event: any) => {
     const { over } = event;
@@ -129,35 +169,43 @@ function App() {
       >
         <div className='app'>
           {/* Componente encargado de agregar notas al contenedor padre */}
-          <div style={{display: 'flex', justifyContent: 'flex-end'}}>
+          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
             <AddItem containerId={'father-items-god'} />
           </div>
 
           <AddContainer /> {/* Añadir el componente de añadir contenedores */}
 
           {containers.map((container) => (
-          <Container
-            key={container.id}
-            id={container.id}
-            items={container.items}
-            isActive={container.id === activeContainerId}
-            type="container"
-          >
-            {container.items.map((item) => (
-              <Card
-                key={item.id}
-                id={item.id}
-                type="item"
-                title={item.title}
-                message={item.message}
-                colorItem={item.color}
-                containerId={container.id}
-              />
-            ))}
-          </Container>
-        ))}
+            <Container
+              key={container.id}
+              id={container.id}
+              items={container.items}
+              isActive={container.id === activeContainerId}
+              type="container"
+            >
+              {container.items.map((item) => (
+                <Card
+                  key={item.id}
+                  id={item.id}
+                  type="item"
+                  title={item.title}
+                  message={item.message}
+                  colorItem={item.color}
+                  containerId={container.id}
+                />
+              ))}
+            </Container>
+          ))}
         </div>
       </DndContext>
+
+      {/* Modal de confirmación de crear un nuevo contenedor */}
+      <ConfirmationModal
+        open={openModal}
+        onClose={handleCancelMove}
+        onConfirm={handleConfirmMove}
+        description="¿Estás seguro de mover este ítem a un nuevo contenedor?, esta acción creará un nuevo contenedor"
+      />
     </div>
   )
 }
