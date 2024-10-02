@@ -3,6 +3,7 @@ import { useDroppable } from '@dnd-kit/core';
 import { horizontalListSortingStrategy, SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button } from '@mui/material';
 import { useContainerContext } from '../Contexts/AppContext';
+import ConfirmationModal from './ModalConfirmar';
 
 interface Item {
   id: string;
@@ -86,7 +87,7 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
     flexWrap: 'wrap',
   };
 
-    // Estilos de los otros contenedores de la aplicacion
+  // Estilos de los otros contenedores de la aplicacion
   const defaultContainerStyle: React.CSSProperties = {
     border: isActive ? '2px dashed blue' : 'none',
     padding: '10px',
@@ -120,12 +121,14 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
   };
 
   return (
+    // Contenedor generado de manera dinamica
     <div ref={setNodeRef} style={containerStyle} className="container">
       {id !== 'father-items-god' && (
         <>
           <button onClick={openModal}>Mostrar las notas</button>
           <button onClick={openDeleteConfirm}>Eliminar contenedor</button>
 
+          {/* Mensaje que muestra en el contenedor de notas y como se representa en este  */}
           <Dialog open={isModalOpen} onClose={closeModal} fullWidth maxWidth="md">
             <DialogTitle>Bienvenido a tu contenedor de notas!</DialogTitle>
             <DialogContent>
@@ -155,23 +158,13 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
             </DialogActions>
           </Dialog>
 
-          <Dialog open={isDeleteConfirmOpen} onClose={cancelRemoveContainer} fullWidth maxWidth="xs">
-            <DialogTitle>Confirmar eliminación</DialogTitle>
-            <DialogContent>
-              <p>
-                ¿Estás seguro de que deseas eliminar este contenedor? Esta acción no se puede deshacer y
-                todos los elementos dentro del contenedor también serán eliminados.
-              </p>
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={confirmRemoveContainer} color="error" variant="contained">
-                Eliminar
-              </Button>
-              <Button onClick={cancelRemoveContainer} color="primary">
-                Cancelar
-              </Button>
-            </DialogActions>
-          </Dialog>
+          {/* Modal para borrar el contenedor */}
+          <ConfirmationModal
+            open={isDeleteConfirmOpen}
+            onClose={cancelRemoveContainer}
+            onConfirm={confirmRemoveContainer}
+            description="¿Estás seguro de que deseas eliminar este contenedor? Esta acción no se puede deshacer y todos los elementos dentro del contenedor también serán eliminados (si es que se encuentra ahí)."
+          />
         </>
       )}
 
