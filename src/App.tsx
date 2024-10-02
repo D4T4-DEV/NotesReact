@@ -28,8 +28,14 @@ function App() {
   // Almacena el contenedor original
   const [sourceContainerId, setSourceContainerId] = useState<string | null>(null);
 
+  const [sourceIndex, setSourceIndex] = useState<number | null>(null); // Índice del contenedor de origen
+  const [destinationIndex, setDestinationIndex] = useState<number | null>(null); // Índice del contenedor destino
+
   // Utilizado para abrir el modal
   const [openModal, setOpenModal] = useState(false);
+
+  // Utilizado para definir el movimiento
+  const [moveType, setMoveType] = useState<string | null>(null);
 
   // Uso del contexto
   const { containers, dispatch } = useContainerContext();
@@ -64,10 +70,16 @@ function App() {
       const destinationIndex = containers.findIndex(container => container.id === over.id);
 
       if (sourceIndex !== -1 && destinationIndex !== -1 && sourceIndex !== destinationIndex) {
-        dispatch({
-          type: 'MOVE_ITEM_BETWEEN_CONTAINERS',
-          payload: { sourceIndex, destinationIndex, itemId: active.id },
-        });
+        const item = containers[sourceIndex].items.find(item => item.id === active.id);
+
+        if (item) {
+          // Almacenar información del movimiento y abrir modal de confirmación
+          setItemToMove(item);
+          setSourceIndex(sourceIndex);
+          setDestinationIndex(destinationIndex);
+          setOpenModal(true); // Abrir el modal para confirmar el movimiento
+          setMoveType('between');
+        }
       }
     }
 
@@ -100,7 +112,8 @@ function App() {
         const movedItem = sourceContainer.items.find(item => item.id === active.id);
 
         if (movedItem) {
-          // Almacenar el ítem y el contenedor original, y abre  el modal
+          // Almacena el ítem y el contenedor original, y abre  el modal y se setea el valor 
+          setMoveType('new');
           setItemToMove(movedItem);
           setSourceContainerId(sourceContainer.id);
           setOpenModal(true);
@@ -111,6 +124,22 @@ function App() {
 
   // Función que se ejecuta si el usuario confirma la acción
   const handleConfirmMove = () => {
+
+    if (itemToMove && sourceIndex !== null && destinationIndex !== null) {
+      console.log('Estamos aqui ')
+      dispatch({
+        type: 'MOVE_ITEM_BETWEEN_CONTAINERS',
+        payload: { sourceIndex, destinationIndex, itemId: itemToMove.id },
+      });
+
+      // Limpiar el estado y cerrar el modal
+      setItemToMove(null);
+      setSourceIndex(null);
+      setDestinationIndex(null);
+      setOpenModal(false);
+    }
+
+
     if (itemToMove && sourceContainerId) {
       // Crear nuevo contenedor
       const newContainer = {
@@ -199,12 +228,16 @@ function App() {
         </div>
       </DndContext>
 
-      {/* Modal de confirmación de crear un nuevo contenedor */}
+      {/* Modal de confirmación de crear un nuevo contenedor y mover un item entre contenedores */}
       <ConfirmationModal
         open={openModal}
         onClose={handleCancelMove}
         onConfirm={handleConfirmMove}
-        description="¿Estás seguro de mover este ítem a un nuevo contenedor?, esta acción creará un nuevo contenedor"
+        description={
+          moveType === 'between'
+            ? "¿Estás seguro de mover este ítem a otro contenedor?"
+            : "¿Estás seguro de mover este ítem a un nuevo contenedor? Esta acción creará un nuevo contenedor."
+        }
       />
     </div>
   )
