@@ -76,9 +76,10 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
   // Estilos del contenedor padre de la aplicacion
   const fatherContainerStyle: React.CSSProperties = {
     border: isActive ? '2px solid blue' : 'none',
+    backgroundColor: isActive ? 'rgba(135, 206, 235, 0.7)' : 'transparent',
     padding: '20px',
     margin: '15px',
-    width: '97%',
+    width: '96.5%',
     position: 'relative',
     display: 'flex',
     flexDirection: 'row',
@@ -90,7 +91,7 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
     border: isActive ? '2px solid blue' : 'none',
     padding: '10px',
     margin: '10px',
-    backgroundColor: isActive ? 'rgba(173, 216, 230, 0.3)' : 'transparent',
+    backgroundColor: isActive ? 'rgba(135, 206, 235, 0.7)' : 'transparent',
     width: 350,
     height: 250,
     position: 'relative',
