@@ -75,7 +75,7 @@ const AddItem: React.FC<AddItemProps> = ({ containerId }) => {
         sx={{
           margin: '20px',
           borderRadius: '10px',
-          fontFamily: '"Noto Sans", sans-serif',
+          fontFamily: 'Noto Sans, sans-serif',
           fontStyle: 'normal',
           bgcolor: '#C7C8CC',
           border: 'none',
@@ -83,25 +83,25 @@ const AddItem: React.FC<AddItemProps> = ({ containerId }) => {
         title='Crear nota'
       >
         <span className="material-symbols-outlined" style={{}}>add_notes</span>
-        <span style={{ marginLeft: '8px', fontFamily: '"Noto Sans", sans-serif', fontStyle: 'normal', }}>Crear notas</span>
+        <span style={{ marginLeft: '8px', fontFamily: 'Noto Sans, sans-serif', fontStyle: 'normal', }}>Crear notas</span>
       </Button>
 
       {/* Modal de formulario */}
       <Dialog open={openForm} onClose={handleCloseForm}>
-        <DialogTitle sx={{ fontFamily: '"Noto Sans", sans-serif', fontStyle: 'normal', textAlign: 'center' }}>Añadir una nueva nota</DialogTitle>
+        <DialogTitle sx={{ fontFamily: 'Noto Sans, sans-serif', fontStyle: 'normal', textAlign: 'center' }}>Añadir una nueva nota</DialogTitle>
         <DialogContent>
           <TextField
             sx={{
               '& .MuiInputBase-root': {
-                fontFamily: '"Noto Sans", sans-serif',
+                fontFamily: 'Noto Sans, sans-serif',
                 fontStyle: 'normal',
               },
               '& .MuiFormLabel-root': {
-                fontFamily: '"Noto Sans", sans-serif',
+                fontFamily: 'Noto Sans, sans-serif',
                 fontStyle: 'normal',
               },
               '& .MuiFormHelperText-root': {
-                fontFamily: '"Noto Sans", sans-serif',
+                fontFamily: 'Noto Sans, sans-serif',
                 fontStyle: 'normal',
               },
             }}
@@ -118,15 +118,15 @@ const AddItem: React.FC<AddItemProps> = ({ containerId }) => {
           <TextField
             sx={{
               '& .MuiInputBase-root': {
-                fontFamily: '"Noto Sans", sans-serif',
+                fontFamily: 'Noto Sans, sans-serif',
                 fontStyle: 'normal',
               },
               '& .MuiFormLabel-root': {
-                fontFamily: '"Noto Sans", sans-serif',
+                fontFamily: 'Noto Sans, sans-serif',
                 fontStyle: 'normal',
               },
               '& .MuiFormHelperText-root': {
-                fontFamily: '"Noto Sans", sans-serif',
+                fontFamily: 'Noto Sans, sans-serif',
                 fontStyle: 'normal',
               },
             }}
@@ -143,10 +143,10 @@ const AddItem: React.FC<AddItemProps> = ({ containerId }) => {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleOpenConfirmation} color="primary" sx={{ marginBottom: 1, fontFamily: '"Noto Sans", sans-serif', fontStyle: 'normal', }} title='Añadir nota'>
+          <Button onClick={handleOpenConfirmation} color="primary" sx={{ marginBottom: 1, fontFamily: 'Noto Sans, sans-serif', fontStyle: 'normal', }} title='Añadir nota'>
             Añadir nota
           </Button>
-          <Button onClick={handleCloseForm} color="primary" sx={{ marginBottom: 1, marginRight: 2, fontFamily: '"Noto Sans", sans-serif', fontStyle: 'normal', }} title='No añadir nota'>
+          <Button onClick={handleCloseForm} color="primary" sx={{ marginBottom: 1, marginRight: 2, fontFamily: 'Noto Sans, sans-serif', fontStyle: 'normal', }} title='No añadir nota'>
             Cancelar
           </Button>
         </DialogActions>

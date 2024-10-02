@@ -6,7 +6,6 @@ import truncateText from '../Functions/Texto/truncarTexto';
 import DeleteItem from './EliminarNota';
 import EditItem from './EditarNota';
 import ShowNote from './MostrarNota';
-// import EditItem from './EditItem'; 
 
 interface CardProps {
     id: string;
@@ -68,7 +67,7 @@ const Card: React.FC<CardProps> = ({ id, title, message, type, colorItem, contai
             <MuiCard
                 ref={setNodeRef}
                 sx={{
-                    fontFamily: '"Noto San", sans-serif',
+                    fontFamily: 'Noto Sans, sans-serif',
                     fontStyle: 'normal',
                     padding: '20px',
                     backgroundColor: colorItem || '#f0f0f0',
@@ -97,14 +96,14 @@ const Card: React.FC<CardProps> = ({ id, title, message, type, colorItem, contai
                 <CardContent sx={{ cursor: 'grab' }}>
                     <Typography
                         variant="h6"
-                        sx={{ fontWeight: 'bold', fontFamily: '"Noto San", sans-serif', fontStyle: 'normal', fontSize: 12 }}
+                        sx={{ fontWeight: 'bold', fontFamily: 'Noto Sans, sans-serif', fontStyle: 'normal', fontSize: 12 }}
                     >
                         {truncateText(title, 15) || 'Sin titulo'}
                     </Typography>
                     <Typography
                         variant="body2"
                         sx={{
-                            fontFamily: '"Noto San", sans-serif',
+                            fontFamily: 'Noto Sans, sans-serif',
                             fontStyle: 'normal',
                             marginTop: '10px',
                             wordBreak: 'break-word',
@@ -122,7 +121,7 @@ const Card: React.FC<CardProps> = ({ id, title, message, type, colorItem, contai
 
                 <CardActions
                     sx={{
-                        fontFamily: '"Noto San", sans-serif',
+                        fontFamily: 'Noto Sans, sans-serif',
                         fontStyle: 'normal',
                         position: 'absolute',
                         right: '-2px',
@@ -138,7 +137,7 @@ const Card: React.FC<CardProps> = ({ id, title, message, type, colorItem, contai
                         size="small"
                         variant="contained"
                         sx={{
-                            fontFamily: '"Noto San", sans-serif',
+                            fontFamily: 'Noto Sans, sans-serif',
                             fontStyle: 'normal',
                             width: 18,
                             height: 18,
@@ -160,7 +159,7 @@ const Card: React.FC<CardProps> = ({ id, title, message, type, colorItem, contai
                         variant="contained"
                         size="small"
                         sx={{
-                            fontFamily: '"Noto San", sans-serif',
+                            fontFamily: 'Noto Sans, sans-serif',
                             fontStyle: 'normal',
                             width: 18,
                             height: 18,

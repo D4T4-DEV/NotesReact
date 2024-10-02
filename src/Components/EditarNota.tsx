@@ -98,13 +98,13 @@ const EditItem: React.FC<EditItemProps> = ({ id, onClose, containerId }) => {
                 aria-labelledby="edit-modal-title"
                 aria-describedby="edit-modal-description"
                 sx={{
-                    fontFamily: '"Noto San", sans-serif',
+                    fontFamily: 'Noto Sans, sans-serif',
                     fontStyle: 'normal'
                 }}
             >
                 <Box sx={style}>
                     <Box sx={{ mb: 2, textAlign: 'center' }}>
-                        <Typography id="edit-modal-title" variant="h6" component="h2" sx={{ fontFamily: '"Noto San", sans-serif', fontStyle: 'normal' }}>
+                        <Typography id="edit-modal-title" variant="h6" component="h2" sx={{ fontFamily: 'Noto Sans, sans-serif', fontStyle: 'normal' }}>
                             Editar Nota
                         </Typography>
                     </Box>
@@ -114,15 +114,15 @@ const EditItem: React.FC<EditItemProps> = ({ id, onClose, containerId }) => {
                         <TextField id="title"
                             sx={{
                                 '& .MuiInputBase-root': {
-                                    fontFamily: '"Noto Sans", sans-serif',
+                                    fontFamily: 'Noto Sans, sans-serif',
                                     fontStyle: 'normal',
                                 },
                                 '& .MuiFormLabel-root': {
-                                    fontFamily: '"Noto Sans", sans-serif',
+                                    fontFamily: 'Noto Sans, sans-serif',
                                     fontStyle: 'normal',
                                 },
                                 '& .MuiFormHelperText-root': {
-                                    fontFamily: '"Noto Sans", sans-serif',
+                                    fontFamily: 'Noto Sans, sans-serif',
                                     fontStyle: 'normal',
                                 },
                             }}
@@ -141,15 +141,15 @@ const EditItem: React.FC<EditItemProps> = ({ id, onClose, containerId }) => {
                         <TextField
                             sx={{
                                 '& .MuiInputBase-root': {
-                                    fontFamily: '"Noto Sans", sans-serif',
+                                    fontFamily: 'Noto Sans, sans-serif',
                                     fontStyle: 'normal',
                                 },
                                 '& .MuiFormLabel-root': {
-                                    fontFamily: '"Noto Sans", sans-serif',
+                                    fontFamily: 'Noto Sans, sans-serif',
                                     fontStyle: 'normal',
                                 },
                                 '& .MuiFormHelperText-root': {
-                                    fontFamily: '"Noto Sans", sans-serif',
+                                    fontFamily: 'Noto Sans, sans-serif',
                                     fontStyle: 'normal',
                                 },
                             }}
@@ -166,9 +166,9 @@ const EditItem: React.FC<EditItemProps> = ({ id, onClose, containerId }) => {
                         />
                     </Box>
 
-                    <Box sx={{ mt: 2, display: 'flex', justifyContent: 'flex-end', fontFamily: '"Noto San", sans-serif', fontStyle: 'normal' }}>
+                    <Box sx={{ mt: 2, display: 'flex', justifyContent: 'flex-end', fontFamily: 'Noto Sans, sans-serif', fontStyle: 'normal' }}>
                         {/* Al hacer clic en Guardar, se abre el modal de confirmación */}
-                        <Button onClick={isEditing ? handleOpenConfirmation : handleActivateModify} style={{ fontFamily: '"Noto San", sans-serif', fontStyle: 'normal' }} title={isEditing ? 'Guardar' : 'Modificar'}>
+                        <Button onClick={isEditing ? handleOpenConfirmation : handleActivateModify} style={{ fontFamily: 'Noto Sans, sans-serif', fontStyle: 'normal' }} title={isEditing ? 'Guardar' : 'Modificar'}>
                             {isEditing ? 'Guardar' : 'Modificar'}
                         </Button>
                         <Button onClick={handleClose} title="Volver">Volver</Button>

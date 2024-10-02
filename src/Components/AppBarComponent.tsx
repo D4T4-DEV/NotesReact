@@ -14,13 +14,13 @@ const AppBarComponent = () => {
                         <Typography
                             variant="h1"
                             component="h1"
-                            sx={{ fontSize: '2em', fontWeight: 'bold', fontFamily: '"Noto San", sans-serif', color: '#FFFF', fontStyle: 'normal' }}
+                            sx={{ fontSize: '2em', fontWeight: 'bold', fontFamily: 'Noto Sans, sans-serif', color: '#FFFF', fontStyle: 'normal' }}
                             className='h1-nm-app'>
                             React Notes❤️
                         </Typography>
 
                         <Typography
-                            sx={{ fontSize: '1.5em', fontWeight: '400', fontFamily: '"Noto San", sans-serif', color: '#FFFF', fontStyle: 'normal' }}>
+                            sx={{ fontSize: '1.5em', fontWeight: '400', fontFamily: 'Noto Sans, sans-serif', color: '#FFFF', fontStyle: 'normal' }}>
                             ¡Bienvenidos al emocionante mundo de React Moderno!
                             En este curso, te sumergirás en las últimas tecnologías y mejores prácticas
                             para construir aplicaciones web de vanguardia. Aprenderás a dominar React, TypeScript y Vite,
