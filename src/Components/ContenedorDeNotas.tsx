@@ -69,7 +69,7 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
     React.isValidElement<CardProps>(child) ? React.cloneElement(child, { isColapsedContainer: isOneItemOpen }) : child
   );
 
-  // useEffect para detectar cuando solo hay un ítem o ninguno y no es el padre para poder darle las acciones de editar y eliminar a la nota
+  // useEffect para detectar cuando solo hay un ítem o ninguno y no es el padre para poder darle las acciones de editar y eliminar a la nota CHECAR ESTE BUG
   useEffect(() => {
     if ((items.length === 1 || items.length === 0) && id !== 'father-items-god') {
       // Abre el modal automáticamente si solo hay un ítem
