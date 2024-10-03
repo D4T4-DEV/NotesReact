@@ -182,16 +182,17 @@ const AddItem: React.FC<AddItemProps> = ({ containerId }) => {
             helperText={`${formData.message.length} caracteres`}
             title='Mensaje de la nota'
           />
-          <Box sx={{ marginTop: 2 }}>
-            <Button onClick={handleOpenConfirmation} color="primary" sx={{ marginBottom: 1 }} title='Añadir nota'>
+          <Box sx={{ marginTop: 2, display: 'flex', justifyContent: 'flex-end', width: '100%' }}>
+            <Button onClick={handleOpenConfirmation} color="primary" sx={{ marginBottom: 1, fontFamily: 'Noto Sans, sans-serif' }} title='Añadir nota'>
               Añadir nota
             </Button>
-            <Button onClick={handleCloseForm} color="primary" sx={{ marginBottom: 1, marginRight: 2 }} title='No añadir nota'>
+            <Button onClick={handleCloseForm} color="primary" sx={{ marginBottom: 1, marginLeft: 2, fontFamily: 'Noto Sans, sans-serif' }} title='No añadir nota'>
               Cancelar
             </Button>
           </Box>
         </Box>
       </Modal>
+
 
       {/* Modal de confirmación */}
       <ConfirmationModal
