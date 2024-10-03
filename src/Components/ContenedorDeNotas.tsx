@@ -61,7 +61,7 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
     setIsModalOpen(!isModalOpen);
   };
 
-  const sortingStrategy =  horizontalListSortingStrategy;
+  const sortingStrategy = horizontalListSortingStrategy;
 
 
   // Medio para poder agregar el estado de 'isModalOpen' existente en el componente Card
