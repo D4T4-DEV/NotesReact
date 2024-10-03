@@ -19,6 +19,8 @@ interface ContainerProps {
   type: 'container';
   children: React.ReactNode;
   isActive: boolean;
+  nameContainer?: string;
+
 }
 
 interface CardProps {
@@ -31,7 +33,7 @@ interface CardProps {
   isColapsedContainer?: boolean;
 }
 
-const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActive }) => {
+const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActive, nameContainer }) => {
   const { setNodeRef } = useDroppable({
     id,
     data: { type },
@@ -194,7 +196,7 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
       )}
 
       <SortableContext items={items.map((item) => item.id)} strategy={sortingStrategy}>
-
+        <div>{nameContainer}</div>
         <div className="card-list" style={{
           position: 'relative',
           display: 'flex',

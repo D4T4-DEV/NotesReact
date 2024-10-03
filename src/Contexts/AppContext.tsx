@@ -13,6 +13,7 @@ interface Item {
 
 interface Container {
   id: string;
+  nameContainer?: string;
   items: Item[];
 }
 
@@ -26,6 +27,7 @@ type Action =
   | { type: 'EDIT_ITEM'; payload: { containerId: string; itemId: string; newTitle: string; newMessage: string } }
   | { type: 'REMOVE_ITEM'; payload: { containerId: string; itemId: string } }
   | { type: 'MOVE_ITEM_BETWEEN_CONTAINERS'; payload: { sourceIndex: number; destinationIndex: number; itemId: string } }
+  | { type: 'EDIT_CONTAINER_NAME'; payload: { containerId: string; newName: string } }
   | { type: 'MOVE_ITEM_WITHIN_CONTAINER'; payload: { containerIndex: number; activeIndex: number; overIndex: number } };
 
 // Estado inicial de los contenedores
@@ -86,6 +88,13 @@ const containerReducer = (state: ContainerState, action: Action): ContainerState
 
     case 'ADD_CONTAINER': { // Añadir un contenedor ('un contenedor de notas')
       return [...state, action.payload];
+    }
+
+    case 'EDIT_CONTAINER_NAME': {  // Modificar el nombre del contenedor
+      const { containerId, newName } = action.payload;
+      return state.map((container) =>
+        container.id === containerId ? { ...container, name: newName } : container
+      );
     }
 
     case 'REMOVE_CONTAINER': { // Eliminar un contenedor ('un contenedor de notas')
