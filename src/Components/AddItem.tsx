@@ -118,9 +118,22 @@ const AddItem: React.FC<AddItemProps> = ({ containerId }) => {
           />
           <TextField
             sx={{
-              '& .MuiInputBase-root': {
+              '& .MuiInputBase-input': {
                 fontFamily: 'Noto Sans, sans-serif',
                 fontStyle: 'normal',
+                '&::-webkit-scrollbar': {
+                  width: '6px',
+                },
+                '&::-webkit-scrollbar-thumb': {
+                  backgroundColor: '#888',
+                  borderRadius: '10px',
+                },
+                '&::-webkit-scrollbar-thumb:hover': {
+                  backgroundColor: '#555',
+                },
+                '&::-webkit-scrollbar-track': {
+                  backgroundColor: 'transparent',
+                },
               },
               '& .MuiFormLabel-root': {
                 fontFamily: 'Noto Sans, sans-serif',

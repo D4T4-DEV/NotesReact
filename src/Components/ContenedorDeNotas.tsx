@@ -151,7 +151,7 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
                 backgroundColor: "#FFF",
               }}
               title={isCollapsed ? "Abrir contenedor de notas" : "Cerrar contenedor de notas"}
-              disabled={(items.length === 1 || items.length === 0) && id !== 'father-items-god'} 
+              disabled={(items.length === 1 || items.length === 0) && id !== 'father-items-god'}
             >
               {isCollapsed ? (
                 <ExpandMoreIcon sx={{ fontSize: 18, color: "#000" }} />

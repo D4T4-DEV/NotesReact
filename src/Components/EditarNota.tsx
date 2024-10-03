@@ -125,6 +125,7 @@ const EditItem: React.FC<EditItemProps> = ({ id, onClose, containerId }) => {
                                     fontFamily: 'Noto Sans, sans-serif',
                                     fontStyle: 'normal',
                                 },
+
                             }}
                             label="Título"
                             variant="outlined"
@@ -140,9 +141,22 @@ const EditItem: React.FC<EditItemProps> = ({ id, onClose, containerId }) => {
                     <Box sx={{ mb: 2 }}>
                         <TextField
                             sx={{
-                                '& .MuiInputBase-root': {
+                                '& .MuiInputBase-input': {
                                     fontFamily: 'Noto Sans, sans-serif',
                                     fontStyle: 'normal',
+                                    '&::-webkit-scrollbar': {
+                                        width: '6px',
+                                    },
+                                    '&::-webkit-scrollbar-thumb': {
+                                        backgroundColor: '#888',
+                                        borderRadius: '10px',
+                                    },
+                                    '&::-webkit-scrollbar-thumb:hover': {
+                                        backgroundColor: '#555',
+                                    },
+                                    '&::-webkit-scrollbar-track': {
+                                        backgroundColor: 'transparent',
+                                    },
                                 },
                                 '& .MuiFormLabel-root': {
                                     fontFamily: 'Noto Sans, sans-serif',
