@@ -1,6 +1,7 @@
 const userNames: string[] = [
     "Paco", "Antonio", "Jose", "Carlos", "David", "Benito",
-    "Ana", "Maria", "Laura", "Sofia", "Isabel", "Lucia", "Elber"
+    "Ana", "Maria", "Laura", "Sofia", "Isabel", "Lucia", "Elber",
+    "Molder"
 ];
 
 export default function getUserRandom(arregloNombres?: string[]): string {
