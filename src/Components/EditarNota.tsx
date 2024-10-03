@@ -30,6 +30,8 @@ interface EditItemProps {
     containerId: string; // Asegúrate de tener el `containerId` como prop
 }
 
+const maxLength: number = 50; // Limite de caracteres para el título
+
 const EditItem: React.FC<EditItemProps> = ({ id, onClose, containerId }) => {
     const { containers, dispatch } = useContainerContext();
 
@@ -62,6 +64,7 @@ const EditItem: React.FC<EditItemProps> = ({ id, onClose, containerId }) => {
 
     const handleChange = (e: { target: { id: string; value: string; }; }) => {
         const { id, value } = e.target;
+        if (id === 'title' && value.length > maxLength) return; // Limitar el título a maxLength caracteres
         setFormData((prev) => ({
             ...prev,
             [id]: value
