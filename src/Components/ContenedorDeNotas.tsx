@@ -69,17 +69,6 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
     React.isValidElement<CardProps>(child) ? React.cloneElement(child, { isColapsedContainer: isOneItemOpen }) : child
   );
 
-  // useEffect para detectar cuando solo hay un ítem o ninguno y no es el padre para poder darle las acciones de editar y eliminar a la nota CHECAR ESTE BUG
-  useEffect(() => {
-    if ((items.length === 1 || items.length === 0) && id !== 'father-items-god') {
-      // Abre el modal automáticamente si solo hay un ítem
-      setIsOneItem(true);
-    } else {
-      // Cierra el modal si hay más ítems o es el contenedor padre
-      setIsOneItem(false);
-    }
-  }, [items, id]); // Medios para que se ejecute cada vez que cambian
-
   // Estilos del contenedor padre de la aplicacion
   const fatherContainerStyle: React.CSSProperties = {
     border: isActive ? '2px dashed blue' : '2px dashed gray',
@@ -100,11 +89,11 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
     padding: '10px',
     margin: '10px',
     backgroundColor: isActive ? 'rgba(135, 206, 235, 0.7)' : 'transparent',
-    width: !isCollapsed ? '96.5%' : '350px',
+    width: !isCollapsed && items.length > 1 ? '96.5%' : '350px',
     height: !isCollapsed ? 'auto' : '270px',
     display: 'inline-block',
-    flexDirection: 'column', // Asegurarse de que los elementos internos se alineen correctamente
-    justifyContent: 'flex-start', // Alineación de los elementos dentro del contenedor
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
   };
 
 
@@ -153,7 +142,7 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
               title={isCollapsed ? "Abrir contenedor de notas" : "Cerrar contenedor de notas"}
               disabled={(items.length === 1 || items.length === 0) && id !== 'father-items-god'}
             >
-              {isCollapsed ? (
+              {isCollapsed || items.length === 1 ? (
                 <ExpandMoreIcon sx={{ fontSize: 18, color: "#000" }} />
               ) : (
                 <ExpandLessIcon sx={{ fontSize: 18, color: "#000" }} />
