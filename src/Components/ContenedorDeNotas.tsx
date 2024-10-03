@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { useDroppable } from '@dnd-kit/core';
-import { horizontalListSortingStrategy, SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
-import { Dialog, DialogTitle, DialogContent, DialogActions, Button } from '@mui/material';
+import { horizontalListSortingStrategy, SortableContext } from '@dnd-kit/sortable';
+import { Button } from '@mui/material';
 import { useContainerContext } from '../Contexts/AppContext';
 import ConfirmationModal from './ModalConfirmar';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 
 interface Item {
   id: string;
@@ -40,15 +42,6 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
   const [isCollapsed, setIsCollapsed] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDeleteConfirmOpen, setIsDeleteConfirmOpen] = useState(false);
-  const [isHorizontal, setIsHorizontal] = useState(false); // Nuevo estado para alternar entre horizontal y vertical
-
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
 
   const openDeleteConfirm = () => {
     setIsDeleteConfirmOpen(true);
@@ -63,13 +56,15 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
     setIsDeleteConfirmOpen(false);
   };
 
-  // Alternar entre estrategias de reordenamiento
-  const toggleSortingStrategy = () => {
-    setIsHorizontal((prev) => !prev);
+  const toggleCollapse = () => {
+    setIsCollapsed(!isCollapsed);
+    setIsModalOpen(!isModalOpen);
   };
 
-  const sortingStrategy = isHorizontal ? horizontalListSortingStrategy : verticalListSortingStrategy;
+  const sortingStrategy =  horizontalListSortingStrategy;
 
+
+  // Medio para poder agregar el estado de 'isModalOpen' existente en el componente Card
   const childrenArray = React.Children.map(children, (child) =>
     React.isValidElement<CardProps>(child) ? React.cloneElement(child, { isModalOpen }) : child
   );
@@ -93,9 +88,12 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
     padding: '10px',
     margin: '10px',
     backgroundColor: isActive ? 'rgba(135, 206, 235, 0.7)' : 'transparent',
-    width: 350,
+    width: '96.5%',
     height: 250,
     position: 'relative',
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
   };
 
   const containerStyle = id === 'father-items-god' ? fatherContainerStyle : defaultContainerStyle;
@@ -121,71 +119,56 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
   };
 
   return (
-    // Contenedor generado de manera dinamica
     <div ref={setNodeRef} style={containerStyle} className="container">
       {id !== 'father-items-god' && (
         <>
-          <button onClick={openModal}>Mostrar las notas</button>
-
-
-
-          {/* <button onClick={openDeleteConfirm}>Eliminar contenedor</button> */}
-
-          {/* Boton de borrar */}
-          <Button
-            onClick={openDeleteConfirm}
-            variant="contained"
-            size="small"
-            sx={{
-              fontFamily: 'Noto Sans, sans-serif',
-              fontStyle: 'normal',
-              width: 18,
-              height: 18,
-              minWidth: 0,
-              borderRadius: "50%",
-              padding: 0,
-              backgroundColor: "#FFF",
-            }}
-            title="Delete note"
-          >
-            <span className="material-symbols-outlined" style={{ fontSize: 18, color: "#000" }}>
-              delete
-            </span>
-          </Button>
-
-
-
-          {/* Mensaje que muestra en el contenedor de notas y como se representa en este  */}
-          <Dialog open={isModalOpen} onClose={closeModal} fullWidth maxWidth="md">
-            <DialogTitle>Bienvenido a tu contenedor de notas!</DialogTitle>
-            <DialogContent>
-              <button onClick={toggleSortingStrategy}>
-                Cambiar a {isHorizontal ? 'Reordenamiento de notas de manera vertical' : 'Reordenamiento de manera horizontal'}
-              </button>
-              {items.length === 0 ? (
-                <div>No hay ítems, arrastra las notas o borrame 👻📝</div>
+          {/* Botones de accion  */}
+          <div style={{ textAlign: 'center' }}>
+            <Button
+              onClick={toggleCollapse}
+              variant="contained"
+              size="small"
+              sx={{
+                fontFamily: 'Noto Sans, sans-serif',
+                fontStyle: 'normal',
+                width: 18,
+                height: 18,
+                minWidth: 0,
+                borderRadius: "50%",
+                padding: 0,
+                backgroundColor: "#FFF",
+              }}
+              title={isCollapsed ? "Abrir contenedor de notas" : "Cerrar contenedor de notas"}
+            >
+              {isCollapsed ? (
+                <ExpandMoreIcon sx={{ fontSize: 18, color: "#000" }} />
               ) : (
-                <SortableContext items={items.map((item) => item.id)} strategy={sortingStrategy}>
-                  <div
-                    style={{ display: 'flex', flexDirection: isHorizontal ? 'row' : 'column', gap: '10px', padding: '10px' }}
-                  >
-                    {childrenArray?.map((child, index) => (
-                      <div key={index} style={{ marginBottom: '10px' }}>
-                        {child}
-                      </div>
-                    ))}
-                  </div>
-                </SortableContext>
+                <ExpandLessIcon sx={{ fontSize: 18, color: "#000" }} />
               )}
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={closeModal} color="primary">
-                Cerrar
-              </Button>
-            </DialogActions>
-          </Dialog>
+            </Button>
 
-          {/* Modal para borrar el contenedor */}
+            <Button
+              onClick={openDeleteConfirm}
+              variant="contained"
+              size="small"
+              sx={{
+                fontFamily: 'Noto Sans, sans-serif',
+                fontStyle: 'normal',
+                width: 18,
+                height: 18,
+                minWidth: 0,
+                borderRadius: "50%",
+                padding: 0,
+                backgroundColor: "#FFF",
+              }}
+              title="Delete note"
+            >
+              <span className="material-symbols-outlined" style={{ fontSize: 18, color: "#000" }}>
+                delete
+              </span>
+            </Button>
+          </div>
+
           <ConfirmationModal
             open={isDeleteConfirmOpen}
             onClose={cancelRemoveContainer}
@@ -196,13 +179,25 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
       )}
 
       <SortableContext items={items.map((item) => item.id)} strategy={sortingStrategy}>
-        <div className="card-list" style={{ position: 'relative', display: 'flex', flexDirection: 'row', flexWrap: 'wrap', gap: '10px' }}>
+
+        <div className="card-list" style={{
+          position: 'relative',
+          display: 'flex',
+          flexDirection: 'row',
+          flexWrap: 'wrap',
+          gap: '5px'
+        }}
+        >
+
           {id === 'father-items-god' && items.length === 0 && <div className="empty">Aquí se mostrarán los items principales, tranquilo que me voy y vuelvo 👻🥸</div>}
+
           {items.length === 0 && id !== 'father-items-god' ? (
+
             <div className="empty">Suelta los items aquí</div>
+
           ) : id === 'father-items-god' ? (
             childrenArray?.map((child, index) => (
-              <div key={index} style={{ marginBottom: '10px' }}>
+              <div key={index} style={{ marginBottom: '5px' }}>
                 {child}
               </div>
             ))
@@ -214,7 +209,7 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
             ))
           ) : (
             childrenArray?.map((child, index) => (
-              <div key={index} style={{ marginBottom: '10px' }}>
+              <div key={index} style={{ marginBottom: '0' }}>
                 {child}
               </div>
             ))
