@@ -82,7 +82,7 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
 
   // Estilos del contenedor padre de la aplicacion
   const fatherContainerStyle: React.CSSProperties = {
-    border: isActive ? '2px dashed blue' : 'none',
+    border: isActive ? '2px dashed blue' : '2px dashed gray',
     backgroundColor: isActive ? 'rgba(135, 206, 235, 0.5)' : 'transparent',
     padding: '20px',
     margin: '15px',
@@ -96,17 +96,17 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
 
   // Estilos de los otros contenedores de la aplicacion
   const defaultContainerStyle: React.CSSProperties = {
-    border: isActive ? '2px dashed blue' : 'none',
+    border: isActive ? '2px dashed blue' : '2px dashed gray',
     padding: '10px',
     margin: '10px',
     backgroundColor: isActive ? 'rgba(135, 206, 235, 0.7)' : 'transparent',
-    width: !isCollapsed ? '96.5%' : 350,
-    height: 250,
-    position: 'relative',
-    display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+    width: !isCollapsed ? '96.5%' : '350px',
+    height: !isCollapsed ? 'auto' : '270px',
+    display: 'inline-block',
+    flexDirection: 'column', // Asegurarse de que los elementos internos se alineen correctamente
+    justifyContent: 'flex-start', // Alineación de los elementos dentro del contenedor
   };
+
 
   const containerStyle = id === 'father-items-god' ? fatherContainerStyle : defaultContainerStyle;
 
@@ -131,11 +131,11 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
   };
 
   return (
-    <div ref={setNodeRef} style={containerStyle} className="container">
+    <div ref={setNodeRef} style={containerStyle}>
       {id !== 'father-items-god' && (
         <>
           {/* Botones de accion  */}
-          <div style={{ textAlign: 'center' }}>
+          <div style={{ textAlign: 'left' }}>
             <Button
               onClick={toggleCollapse}
               variant="contained"
@@ -198,23 +198,46 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
         <div className="card-list" style={{
           position: 'relative',
           display: 'flex',
-          flexDirection: 'row',
-          flexWrap: 'wrap',
-          gap: '5px'
         }}
         >
 
           {id === 'father-items-god' && items.length === 0 &&
-            <div className="empty">Aquí se mostrarán los items principales, tranquilo que me voy y vuelvo 👻🥸</div>
+            <div className="empty"
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                width: '1850px',
+                fontSize: '18px',
+                color: 'gray',
+                fontFamily: 'Noto Sans, sans-serif',
+                textAlign: 'center',
+              }}
+            >
+              Aquí se mostrarán los items principales, tranquilo que me voy y vuelvo 👻🥸</div>
           }
 
           {items.length === 0 && id !== 'father-items-god' ? (
-
-            <div className="empty">Suelta los items aquí</div>
+            <div
+              className="empty"
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: '240px',
+                width: '100%',
+                fontSize: '18px',
+                color: 'gray',
+                fontFamily: 'Noto Sans, sans-serif',
+                textAlign: 'center',
+              }}
+            >
+              Suelta los items aquí
+            </div>
 
           ) : id === 'father-items-god' ? (
             childrenArray?.map((child, index) => (
-              <div key={index} style={{ marginBottom: '5px' }}>
+              <div key={index} style={{ marginBottom: '10px' }}>
                 {child}
               </div>
             ))
@@ -226,7 +249,7 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
             ))
           ) : (
             childrenArray?.map((child, index) => (
-              <div key={index} style={{ marginBottom: '0' }}>
+              <div key={index} style={{ marginBottom: '10px' }}>
                 {child}
               </div>
             ))

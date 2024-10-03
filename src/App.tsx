@@ -203,27 +203,29 @@ function App() {
 
           <AddContainer /> {/* Añadir el componente de añadir contenedores */}
 
-          {containers.map((container) => (
-            <Container
-              key={container.id}
-              id={container.id}
-              items={container.items}
-              isActive={container.id === activeContainerId}
-              type="container"
-            >
-              {container.items.map((item) => (
-                <Card
-                  key={item.id}
-                  id={item.id}
-                  type="item"
-                  title={item.title}
-                  message={item.message}
-                  colorItem={item.color}
-                  containerId={container.id}
-                />
-              ))}
-            </Container>
-          ))}
+          <div style={{display:'flex', flexWrap: 'wrap'}}>
+            {containers.map((container) => (
+              <Container
+                key={container.id}
+                id={container.id}
+                items={container.items}
+                isActive={container.id === activeContainerId}
+                type="container"
+              >
+                {container.items.map((item) => (
+                  <Card
+                    key={item.id}
+                    id={item.id}
+                    type="item"
+                    title={item.title}
+                    message={item.message}
+                    colorItem={item.color}
+                    containerId={container.id}
+                  />
+                ))}
+              </Container>
+            ))}
+          </div>
         </div>
       </DndContext>
 

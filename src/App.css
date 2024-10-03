@@ -32,3 +32,12 @@ body{
 
 
 /*Estilos de la aplicacion*/
+.empty {
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  height: 100%; 
+  font-size: 18px; 
+  color: gray; 
+  font-family: 'Noto Sans', sans-serif;
+}
