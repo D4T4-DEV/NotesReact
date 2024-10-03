@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDroppable } from '@dnd-kit/core';
 import { horizontalListSortingStrategy, SortableContext } from '@dnd-kit/sortable';
 import { Button } from '@mui/material';
@@ -63,6 +63,15 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
 
   const sortingStrategy = horizontalListSortingStrategy;
 
+  // Este useEffect sirve para que cuando se renderiza, el componente si en el 
+  // contenedor solo tiene un item, activa los botones de borrar nota y eliminar nota
+  useEffect(() => {
+    if (items.length === 1) {
+      setIsOneItem(true); // Un solo elemento, se abre
+    } else {
+      setIsOneItem(false); // Más de uno o ninguno, se cierra
+    }
+  }, [items]);
 
   // Medio para poder agregar el estado de 'isModalOpen' existente en el componente Card
   const childrenArray = React.Children.map(children, (child) =>
