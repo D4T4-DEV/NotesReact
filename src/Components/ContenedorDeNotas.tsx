@@ -66,7 +66,7 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
   // Este useEffect sirve para que cuando se renderiza, el componente si en el 
   // contenedor solo tiene un item, activa los botones de borrar nota y eliminar nota
   useEffect(() => {
-    if (items.length === 1) {
+    if (items.length <= 1) {
       setIsOneItem(true); // Un solo elemento, se abre
     } else {
       setIsOneItem(false); // Más de uno o ninguno, se cierra
@@ -102,9 +102,9 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
     backgroundColor: isActive ? 'rgba(135, 206, 235, 0.7)' : 'transparent',
     width: !isCollapsed && items.length > 1 ? '96.5%' : '350px',
     height: !isCollapsed ? 'auto' : '270px',
-    display: 'inline-block',
-    flexDirection: 'column',
-    justifyContent: 'flex-start',
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
   };
 
 
@@ -198,6 +198,7 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
         <div className="card-list" style={{
           position: 'relative',
           display: 'flex',
+          flexWrap: 'wrap'
         }}
         >
 
