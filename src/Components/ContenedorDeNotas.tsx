@@ -71,7 +71,7 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
 
   // Estilos del contenedor padre de la aplicacion
   const fatherContainerStyle: React.CSSProperties = {
-    border: isActive ? '2px dashed blue' : '2px dashed gray',
+    border: isActive ? '2px dashed blue' : 'none',
     backgroundColor: isActive ? 'rgba(135, 206, 235, 0.5)' : 'transparent',
     padding: '20px',
     margin: '15px',
@@ -79,8 +79,10 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
     height: '200px',
     position: 'relative',
     display: 'flex',
+    justifyContent: items.length === 0 ? 'center' : '',
     flexDirection: 'row',
     flexWrap: 'wrap',
+    
   };
 
   // Estilos de los otros contenedores de la aplicacion
@@ -196,14 +198,14 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                width: '1850px',
-                fontSize: '18px',
+                width: '100%',
+                fontSize: '40px',
                 color: 'gray',
                 fontFamily: 'Noto Sans, sans-serif',
                 textAlign: 'center',
               }}
             >
-              Aquí se mostrarán los items principales, tranquilo que me voy y vuelvo 👻🥸</div>
+              PANEL PRINCIPAL</div>
           }
 
           {items.length === 0 && id !== 'father-items-god' ? (
@@ -211,7 +213,7 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
               className="empty"
               style={{
                 display: 'flex',
-                justifyContent: 'center',
+                justifyContent: 'center', 
                 alignItems: 'center',
                 height: '240px',
                 width: '100%',
