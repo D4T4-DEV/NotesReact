@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
+import { Box, Button, Modal, TextField } from '@mui/material';
 import generateUUID from '../Functions/Identificadores/generarUUID';
 import getColorNoteRamdon from '../Functions/Aleatorios/getColorNote';
 import { useContainerContext } from '../Contexts/AppContext';
@@ -64,10 +64,9 @@ const AddItem: React.FC<AddItemProps> = ({ containerId }) => {
     setOpenConfirmation(false); // Cerrar el modal de confirmación
   };
 
-
   return (
     <>
-      {/* Boton que despliega el modal */}
+      {/* Botón que despliega el modal */}
       <Button
         onClick={handleOpenForm}
         variant="outlined"
@@ -82,14 +81,41 @@ const AddItem: React.FC<AddItemProps> = ({ containerId }) => {
         }}
         title='Crear nota'
       >
-        <span className="material-symbols-outlined" style={{}}>add_notes</span>
-        <span style={{ marginLeft: '8px', fontFamily: 'Noto Sans, sans-serif', fontStyle: 'normal', }}>Crear notas</span>
+        <span className="material-symbols-outlined">add_notes</span>
+        <span style={{ marginLeft: '8px', fontFamily: 'Noto Sans, sans-serif', fontStyle: 'normal' }}>Crear notas</span>
       </Button>
 
       {/* Modal de formulario */}
-      <Dialog open={openForm} onClose={handleCloseForm}>
-        <DialogTitle sx={{ fontFamily: 'Noto Sans, sans-serif', fontStyle: 'normal', textAlign: 'center' }}>Añadir una nueva nota</DialogTitle>
-        <DialogContent>
+      <Modal
+        open={openForm}
+        onClose={handleCloseForm}
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <Box
+          sx={{
+            width: {
+              xs: '70%',
+              sm: '80%',
+              md: '50%',
+              lg: '400px'
+            },
+            bgcolor: 'background.paper',
+            borderRadius: 2,
+            boxShadow: 24,
+            p: 4,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            margin: 'auto',
+          }}
+        >
+          <Box sx={{ fontFamily: 'Noto Sans, sans-serif', fontStyle: 'normal', textAlign: 'center', marginBottom: 2 }}>
+            Añadir una nueva nota
+          </Box>
           <TextField
             title='Titulo de la nota'
             sx={{
@@ -156,16 +182,16 @@ const AddItem: React.FC<AddItemProps> = ({ containerId }) => {
             helperText={`${formData.message.length} caracteres`}
             title='Mensaje de la nota'
           />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleOpenConfirmation} color="primary" sx={{ marginBottom: 1, fontFamily: 'Noto Sans, sans-serif', fontStyle: 'normal', }} title='Añadir nota'>
-            Añadir nota
-          </Button>
-          <Button onClick={handleCloseForm} color="primary" sx={{ marginBottom: 1, marginRight: 2, fontFamily: 'Noto Sans, sans-serif', fontStyle: 'normal', }} title='No añadir nota'>
-            Cancelar
-          </Button>
-        </DialogActions>
-      </Dialog>
+          <Box sx={{ marginTop: 2 }}>
+            <Button onClick={handleOpenConfirmation} color="primary" sx={{ marginBottom: 1 }} title='Añadir nota'>
+              Añadir nota
+            </Button>
+            <Button onClick={handleCloseForm} color="primary" sx={{ marginBottom: 1, marginRight: 2 }} title='No añadir nota'>
+              Cancelar
+            </Button>
+          </Box>
+        </Box>
+      </Modal>
 
       {/* Modal de confirmación */}
       <ConfirmationModal
