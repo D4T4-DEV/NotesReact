@@ -35,7 +35,7 @@ const AddContainer: React.FC = () => {
                 transition: 'background-color 0.3s ease, border 0.3s ease',
             }}
         >
-            <p style={{ textAlign: 'center' }}>Arrastra aquí para crear un nuevo contenedor</p>
+            <p style={{ textAlign: 'center', color: '#808080', }}>Arrastra aquí para crear un nuevo contenedor</p>
         </div>
     );
 };
