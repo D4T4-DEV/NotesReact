@@ -209,6 +209,7 @@ function App() {
                 key={container.id}
                 id={container.id}
                 items={container.items}
+                nameContainer ={container.nameContainer}
                 isActive={container.id === activeContainerId}
                 type="container"
               >
