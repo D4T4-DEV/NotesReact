@@ -126,7 +126,6 @@ function App() {
   const handleConfirmMove = () => {
 
     if (itemToMove && sourceIndex !== null && destinationIndex !== null) {
-      console.log('Estamos aqui ')
       dispatch({
         type: 'MOVE_ITEM_BETWEEN_CONTAINERS',
         payload: { sourceIndex, destinationIndex, itemId: itemToMove.id },

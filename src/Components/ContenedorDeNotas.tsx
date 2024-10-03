@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDroppable } from '@dnd-kit/core';
 import { horizontalListSortingStrategy, SortableContext } from '@dnd-kit/sortable';
 import { Button } from '@mui/material';
@@ -28,7 +28,7 @@ interface CardProps {
   type: 'item' | 'container';
   colorItem?: string;
   containerId: string;
-  isModalOpen?: boolean;
+  isColapsedContainer?: boolean;
 }
 
 const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActive }) => {
@@ -40,7 +40,7 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
   const { dispatch } = useContainerContext();
 
   const [isCollapsed, setIsCollapsed] = useState(true);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isOneItemOpen, setIsOneItem] = useState(false);
   const [isDeleteConfirmOpen, setIsDeleteConfirmOpen] = useState(false);
 
   const openDeleteConfirm = () => {
@@ -58,7 +58,7 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
 
   const toggleCollapse = () => {
     setIsCollapsed(!isCollapsed);
-    setIsModalOpen(!isModalOpen);
+    setIsOneItem(!isOneItemOpen);
   };
 
   const sortingStrategy = horizontalListSortingStrategy;
@@ -66,8 +66,19 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
 
   // Medio para poder agregar el estado de 'isModalOpen' existente en el componente Card
   const childrenArray = React.Children.map(children, (child) =>
-    React.isValidElement<CardProps>(child) ? React.cloneElement(child, { isModalOpen }) : child
+    React.isValidElement<CardProps>(child) ? React.cloneElement(child, { isColapsedContainer: isOneItemOpen }) : child
   );
+
+  // useEffect para detectar cuando solo hay un ítem o ninguno y no es el padre para poder darle las acciones de editar y eliminar a la nota
+  useEffect(() => {
+    if ((items.length === 1 || items.length === 0) && id !== 'father-items-god') {
+      // Abre el modal automáticamente si solo hay un ítem
+      setIsOneItem(true);
+    } else {
+      // Cierra el modal si hay más ítems o es el contenedor padre
+      setIsOneItem(false);
+    }
+  }, [items, id]); // Medios para que se ejecute cada vez que cambian
 
   // Estilos del contenedor padre de la aplicacion
   const fatherContainerStyle: React.CSSProperties = {
@@ -140,6 +151,7 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
                 backgroundColor: "#FFF",
               }}
               title={isCollapsed ? "Abrir contenedor de notas" : "Cerrar contenedor de notas"}
+              disabled={(items.length === 1 || items.length === 0) && id !== 'father-items-god'} 
             >
               {isCollapsed ? (
                 <ExpandMoreIcon sx={{ fontSize: 18, color: "#000" }} />

@@ -14,10 +14,10 @@ interface CardProps {
     type: 'item' | 'container';
     colorItem?: string;
     containerId: string;
-    isModalOpen?: boolean;
+    isColapsedContainer?: boolean;
 }
 
-const Card: React.FC<CardProps> = ({ id, title, message, type, colorItem, containerId, isModalOpen }) => {
+const Card: React.FC<CardProps> = ({ id, title, message, type, colorItem, containerId, isColapsedContainer }) => {
 
     // Utilidades de dnd-kit para poder reordernar componentes
     const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
@@ -38,10 +38,10 @@ const Card: React.FC<CardProps> = ({ id, title, message, type, colorItem, contai
     const handleMouseEnter = useCallback(() => {
         // Aplica hover si no está arrastrando, si el contenedor es el principal, 
         // o si el modal está abierto
-        if (!isDragging && (containerId === 'father-items-god' || isModalOpen)) {
+        if (!isDragging && (containerId === 'father-items-god' || isColapsedContainer)) {
             setHover(true);
         }
-    }, [isDragging, containerId, isModalOpen]);
+    }, [isDragging, containerId, isColapsedContainer]);
 
 
     const handleMouseLeave = useCallback(() => setHover(false), []);
