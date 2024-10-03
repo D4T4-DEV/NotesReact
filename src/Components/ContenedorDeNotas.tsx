@@ -88,7 +88,7 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
     padding: '10px',
     margin: '10px',
     backgroundColor: isActive ? 'rgba(135, 206, 235, 0.7)' : 'transparent',
-    width: '96.5%',
+    width: !isCollapsed ? '96.5%' : 350,
     height: 250,
     position: 'relative',
     display: 'flex',
@@ -173,7 +173,9 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
             open={isDeleteConfirmOpen}
             onClose={cancelRemoveContainer}
             onConfirm={confirmRemoveContainer}
-            description="¿Estás seguro de que deseas eliminar este contenedor? Esta acción no se puede deshacer y todos los elementos dentro del contenedor también serán eliminados (si es que se encuentra ahí)."
+            description="¿Estás seguro de que deseas eliminar este contenedor? Esta acción no se 
+            puede deshacer y todos los elementos dentro del contenedor también serán eliminados 
+            (si es que se encuentra alguna nota en este)."
           />
         </>
       )}
@@ -189,7 +191,9 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
         }}
         >
 
-          {id === 'father-items-god' && items.length === 0 && <div className="empty">Aquí se mostrarán los items principales, tranquilo que me voy y vuelvo 👻🥸</div>}
+          {id === 'father-items-god' && items.length === 0 &&
+            <div className="empty">Aquí se mostrarán los items principales, tranquilo que me voy y vuelvo 👻🥸</div>
+          }
 
           {items.length === 0 && id !== 'father-items-god' ? (
 
