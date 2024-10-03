@@ -174,7 +174,7 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
                 padding: 0,
                 backgroundColor: "#FFF",
               }}
-              title="Delete note"
+              title="Borrar contenedor"
             >
               <span className="material-symbols-outlined" style={{ fontSize: 18, color: "#000" }}>
                 delete
