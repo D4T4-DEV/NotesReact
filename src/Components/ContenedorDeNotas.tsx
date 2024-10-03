@@ -76,6 +76,7 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
     padding: '20px',
     margin: '15px',
     width: '96.5%',
+    height: '200px',
     position: 'relative',
     display: 'flex',
     flexDirection: 'row',
