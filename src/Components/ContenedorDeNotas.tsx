@@ -307,7 +307,7 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
               }}
               title='Aqui se verán las notas'
             >
-              PANEL PRINCIPAL</div>
+              ESTE ES REACT NOTES ❤️</div>
           }
 
           {items.length === 0 && id !== 'father-items-god' ? (

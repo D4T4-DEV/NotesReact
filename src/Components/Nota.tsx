@@ -128,6 +128,7 @@ const Card: React.FC<CardProps> = ({ id, title, message, type, colorItem, contai
                         transition: 'opacity 0.3s ease-in-out',
                         visibility: isColapsedContainer || isDragging ? 'visible' : 'hidden',
                         fontSize: '16px',
+                        fontFamily: 'Noto Sans, sans-serif',
                     }} title='Título de la nota'>
                         {truncateText(title, 15) || 'Sin título'}
                     </Typography>

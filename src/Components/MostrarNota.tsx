@@ -77,6 +77,7 @@ export default function ShowNote({ open, onClose, identifyNote }: ShowNoteProps)
                             sx={{
                                 fontFamily: 'Noto Sans, sans-serif',
                                 padding: 0.5,
+                                borderRadius: '50%'
                             }}
                             onClick={handleClose}
                             title="Cerrar mostrar nota"
@@ -85,11 +86,6 @@ export default function ShowNote({ open, onClose, identifyNote }: ShowNoteProps)
                                 cancel
                             </span>
                         </Button>
-                    </Box>
-                    <Box sx={{ mb: 2.5, textAlign: 'center' }}>
-                        <Typography id="modal-modal-title" variant="h6" component="h2" sx={{ fontFamily: 'Noto Sans, sans-serif', fontSize: 18 }}>
-                            Aqui esta tu nota ❤️
-                        </Typography>
                     </Box>
 
                     <Box sx={{ mb: 2 }}>
@@ -101,7 +97,7 @@ export default function ShowNote({ open, onClose, identifyNote }: ShowNoteProps)
                             display: '-webkit-box',
                             WebkitLineClamp: 5,
                             WebkitBoxOrient: 'vertical',
-                            fontSize: 20,
+                            fontSize: 36,
                             fontWeight: 'bolder',
                             marginLeft: '25px'
                         }}
@@ -141,7 +137,8 @@ export default function ShowNote({ open, onClose, identifyNote }: ShowNoteProps)
                         <Typography sx={{
                             fontFamily: 'Noto Sans, sans-serif',
                             marginLeft: '25px',
-                            marginRight: '50px'
+                            marginRight: '50px',
+                            fontWeight: 400,
                         }}
                         >
                             {noteData.note}
