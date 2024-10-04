@@ -210,7 +210,7 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
                 <span
                   onDoubleClick={handleDoubleClick}
                   style={{ fontSize: '16px', fontWeight: 'bold', cursor: 'pointer' }}
-                  title='Dame doble click para poder editar mi nombre aquí'
+                  title='Dame doble click para poder renombrarme aquí'
                 >
                   {containerName || 'Renombrame'}
                 </span>
