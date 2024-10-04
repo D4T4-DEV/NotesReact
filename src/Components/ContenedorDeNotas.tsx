@@ -33,6 +33,8 @@ interface CardProps {
   isColapsedContainer?: boolean;
 }
 
+const maxLength: number = 15; // Limite de caracteres para el título
+
 const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActive, nameContainer }) => {
   const { setNodeRef } = useDroppable({
     id,
@@ -44,6 +46,10 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
   const [isCollapsed, setIsCollapsed] = useState(true);
   const [isOneItemOpen, setIsOneItem] = useState(false);
   const [isDeleteConfirmOpen, setIsDeleteConfirmOpen] = useState(false);
+
+  // Nuevo estado para manejar el nombre o renombre del contenedor
+  const [containerName, setContainerName] = useState(nameContainer || '');
+  const [isEditing, setIsEditing] = useState(false);
 
   const openDeleteConfirm = () => {
     setIsDeleteConfirmOpen(true);
@@ -63,17 +69,38 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
     setIsOneItem(!isOneItemOpen);
   };
 
+  useEffect(() => {
+    if (items.length === 1) {
+      setIsCollapsed(false);
+      setIsOneItem(true);
+    } else {
+
+      if (items.length === 1) {
+        setIsOneItem(true);
+      }
+      setIsOneItem  (false);
+      setIsCollapsed(true);
+    }
+  }, [items.length]);
+
   const sortingStrategy = horizontalListSortingStrategy;
 
-  // Este useEffect sirve para que cuando se renderiza, el componente si en el 
-  // contenedor solo tiene un item, activa los botones de borrar nota y eliminar nota
-  useEffect(() => {
-    if (items.length <= 1) {
-      setIsOneItem(true); // Un solo elemento, se abre
-    } else {
-      setIsOneItem(false); // Más de uno o ninguno, se cierra
-    }
-  }, [items]);
+  const handleDoubleClick = () => {
+    setIsEditing(true);
+  };
+
+  const handleChange = (e: { target: { id: string; value: string; }; }) => {
+    const { id, value } = e.target;
+    if (id === 'title-container' && value.length > maxLength) return; // Limitar el título a maxLength caracteres
+    setContainerName(
+      value
+    );
+  };
+
+  const handleBlur = () => {
+    setIsEditing(false);
+  };
+
 
   // Medio para poder agregar el estado de 'isModalOpen' existente en el componente Card
   const childrenArray = React.Children.map(children, (child) =>
@@ -93,7 +120,7 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
     justifyContent: items.length === 0 ? 'center' : '',
     flexDirection: 'row',
     flexWrap: 'wrap',
-    
+
   };
 
   // Estilos de los otros contenedores de la aplicacion
@@ -105,10 +132,9 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
     width: !isCollapsed && items.length > 1 ? '96.5%' : '350px',
     height: !isCollapsed ? 'auto' : '270px',
     display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+    flexDirection: items.length >= 0 ? 'column' : 'row',
+    flexWrap: items.length >= 0 ? 'nowrap' : 'wrap',
   };
-
 
   const containerStyle = id === 'father-items-god' ? fatherContainerStyle : defaultContainerStyle;
 
@@ -136,8 +162,32 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
     <div ref={setNodeRef} style={containerStyle}>
       {id !== 'father-items-god' && (
         <>
+
           {/* Botones de accion  */}
-          <div style={{ textAlign: 'left' }}>
+          <div style={{ display: 'flex', alignItems: 'center', }}>
+            {/* Input para renombrar el contenedor */}
+            <div style={{ marginRight: 5, }}>
+              {isEditing ? (
+                <input
+                  type="text"
+                  id="title-container"
+                  value={containerName}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') handleBlur();
+                  }}
+                  style={{ fontSize: '16px', padding: '5px', width: '200px' }}
+                />
+              ) : (
+                <span
+                  onDoubleClick={handleDoubleClick}
+                  style={{ fontSize: '16px', fontWeight: 'bold', cursor: 'pointer' }}
+                >
+                  {containerName || 'Nombra el contenedor'}
+                </span>
+              )}
+            </div>
             <Button
               onClick={toggleCollapse}
               variant="contained"
@@ -151,9 +201,10 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
                 borderRadius: "50%",
                 padding: 0,
                 backgroundColor: "#FFF",
+                marginRight: 1
               }}
               title={isCollapsed ? "Abrir contenedor de notas" : "Cerrar contenedor de notas"}
-              disabled={(items.length === 1 || items.length === 0) && id !== 'father-items-god'}
+              disabled={items.length <= 1 && id !== 'father-items-god'}
             >
               {isCollapsed || items.length === 1 ? (
                 <ExpandMoreIcon sx={{ fontSize: 18, color: "#000" }} />
@@ -196,7 +247,6 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
       )}
 
       <SortableContext items={items.map((item) => item.id)} strategy={sortingStrategy}>
-        <div>{nameContainer}</div>
         <div className="card-list" style={{
           position: 'relative',
           display: 'flex',
@@ -225,7 +275,7 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
               className="empty"
               style={{
                 display: 'flex',
-                justifyContent: 'center', 
+                justifyContent: 'center',
                 alignItems: 'center',
                 height: '240px',
                 width: '100%',
