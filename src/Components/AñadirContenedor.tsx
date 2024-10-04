@@ -37,7 +37,7 @@ const AddContainer: React.FC = () => {
                 marginLeft: 20
             }}
         >
-            <p style={{ textAlign: 'center', color: '#808080', cursor: 'default' }} title='Contenedor de creador de colexiones'>Arrastra aquí una nota para crear un nuevo contenedor</p>
+            <p style={{ textAlign: 'center', color: '#808080', cursor: 'default' }} title='Contenedor de creador de colexiones'>Arrastra aquí una nota para crear una nueva colección de notas</p>
         </div>
     );
 };
