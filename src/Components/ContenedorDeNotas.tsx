@@ -33,7 +33,7 @@ interface CardProps {
   isColapsedContainer?: boolean;
 }
 
-const maxLength: number = 15; // Limite de caracteres para el título
+const maxLength: number = 28; // Limite de caracteres para el título
 
 const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActive, nameContainer }) => {
   const { setNodeRef } = useDroppable({
@@ -141,7 +141,7 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
     padding: '20px',
     margin: '15px',
     width: '96.5%',
-    height: '200px',
+    height: 'auto',
     position: 'relative',
     display: 'flex',
     justifyContent: items.length === 0 ? 'center' : '',
@@ -153,14 +153,15 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
   // Estilos de los otros contenedores de la aplicacion
   const defaultContainerStyle: React.CSSProperties = {
     border: isActive ? '2px dashed blue' : '2px dashed gray',
-    padding: '10px',
-    margin: '10px',
+    padding: '20px',
+    margin: '20px',
     backgroundColor: isActive ? 'rgba(135, 206, 235, 0.7)' : 'transparent',
-    width: !isCollapsed && items.length > 1 ? '96.5%' : '350px',
-    height: !isCollapsed ? 'auto' : '270px',
+    width: !isCollapsed && items.length > 1 ? '96.5%' : '300px',
+    height: !isCollapsed ? 'auto' : '300px',
     display: 'flex',
     flexDirection: items.length >= 0 ? 'column' : 'row',
     flexWrap: items.length >= 0 ? 'nowrap' : 'wrap',
+    borderRadius: 25,
   };
 
   const containerStyle = id === 'father-items-god' ? fatherContainerStyle : defaultContainerStyle;
@@ -302,7 +303,9 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
                 color: 'gray',
                 fontFamily: 'Noto Sans, sans-serif',
                 textAlign: 'center',
+                cursor: 'default'
               }}
+              title='Aqui se verán las notas'
             >
               PANEL PRINCIPAL</div>
           }

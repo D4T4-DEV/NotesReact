@@ -72,7 +72,7 @@ const Card: React.FC<CardProps> = ({ id, title, message, type, colorItem, contai
                     padding: '20px',
                     backgroundColor: colorItem || '#f0f0f0',
                     width: '150px',
-                    height: '150px',
+                    height: '170px',
                     position: 'relative',
                     overflow: 'visible',
                     boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)',
@@ -109,7 +109,7 @@ const Card: React.FC<CardProps> = ({ id, title, message, type, colorItem, contai
                             overflow: 'hidden',
                             textOverflow: 'ellipsis',
                             display: '-webkit-box',
-                            WebkitLineClamp: 6,
+                            WebkitLineClamp: 8,
                             WebkitBoxOrient: 'vertical',
                             fontSize: 10,
                         }}

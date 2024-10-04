@@ -76,8 +76,8 @@ const AddItem: React.FC<AddItemProps> = ({ containerId }) => {
           borderRadius: '10px',
           fontFamily: 'Noto Sans, sans-serif',
           fontStyle: 'normal',
-          bgcolor: '#C7C8CC',
-          border: 'none',
+          bgcolor: '#FFF',
+          border: '2px dashed #000',
         }}
         title='Crear nota'
       >
@@ -113,7 +113,7 @@ const AddItem: React.FC<AddItemProps> = ({ containerId }) => {
             margin: 'auto',
           }}
         >
-          <Box sx={{ fontFamily: 'Noto Sans, sans-serif', fontStyle: 'normal', textAlign: 'center', marginBottom: 2 }}>
+          <Box sx={{ fontFamily: 'Noto Sans, sans-serif', fontStyle: 'normal', textAlign: 'center', marginBottom: 2, fontSize: 24 }}>
             Añadir una nueva nota
           </Box>
           <TextField
@@ -182,12 +182,16 @@ const AddItem: React.FC<AddItemProps> = ({ containerId }) => {
             helperText={`${formData.message.length} caracteres`}
             title='Mensaje de la nota'
           />
-          <Box sx={{ marginTop: 2, display: 'flex', justifyContent: 'flex-end', width: '100%' }}>
-            <Button onClick={handleOpenConfirmation} color="primary" sx={{ marginBottom: 1, fontFamily: 'Noto Sans, sans-serif' }} title='Añadir nota'>
-              Añadir nota
+          <Box sx={{ marginTop: 2, display: 'flex', justifyContent: 'flex-end', width: '100%', }}>
+            <Button onClick={handleOpenConfirmation} color="primary" sx={{ marginBottom: 1, borderRadius: 100 }} title='Añadir nota'>
+              <span className="material-symbols-outlined" style={{fontSize: 30}}>
+                save
+              </span>
             </Button>
-            <Button onClick={handleCloseForm} color="primary" sx={{ marginBottom: 1, marginLeft: 2, fontFamily: 'Noto Sans, sans-serif' }} title='No añadir nota'>
-              Cancelar
+            <Button onClick={handleCloseForm} color="primary" sx={{ marginBottom: 1, marginLeft: 2, borderRadius: 100  }} title='No añadir nota'>
+              <span className="material-symbols-outlined" style={{fontSize: 30}}>
+                cancel
+              </span>
             </Button>
           </Box>
         </Box>

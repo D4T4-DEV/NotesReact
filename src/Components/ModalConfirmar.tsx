@@ -52,9 +52,17 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
         <Typography sx={{ mt: 2, fontFamily: 'Noto Sans, sans-serif', fontStyle: 'normal' }} id="confirmation-modal-description" >
           {description}
         </Typography>
-        <Box sx={{ mt: 2, display: 'flex', justifyContent: 'space-around', fontFamily: 'Noto Sans, sans-serif', fontStyle: 'normal'}}>
-          <Button sx={{ fontFamily: 'Noto Sans, sans-serif', fontStyle: 'normal' }} onClick={onConfirm} title="Confirmar acción">Si</Button>
-          <Button sx={{ fontFamily: 'Noto Sans, sans-serif', fontStyle: 'normal' }} onClick={onClose} title="Cancelar acción">No</Button>
+        <Box sx={{ mt: 2, display: 'flex', justifyContent: 'space-around', fontFamily: 'Noto Sans, sans-serif', fontStyle: 'normal' }}>
+          <Button sx={{ fontFamily: 'Noto Sans, sans-serif', fontStyle: 'normal', borderRadius: '100px', }} onClick={onConfirm} title="Confirmar acción">
+            <span className="material-symbols-outlined">
+              check_circle
+            </span>
+          </Button>
+          <Button sx={{ fontFamily: 'Noto Sans, sans-serif', fontStyle: 'normal', borderRadius: '100px', }} onClick={onClose} title="Cancelar acción">
+            <span className="material-symbols-outlined">
+              cancel
+            </span>
+          </Button>
         </Box>
       </Box>
     </Modal>
