@@ -117,6 +117,7 @@ export default function ShowNote({ open, onClose, identifyNote }: ShowNoteProps)
                         textOverflow: 'ellipsis',
                         display: '-webkit-box',
                         WebkitBoxOrient: 'vertical',
+                        whiteSpace: 'break-spaces',
                         mb: 2,
                         height: '325px',
                         maxHeight: "325px",
