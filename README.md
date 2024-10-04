@@ -42,10 +42,10 @@ This template provides a minimal setup to get React working in Vite with HMR and
 
 
 ### Los colores y demas fueron sacados de: 
--- https://fonts.google.com/icons
--- https://colorhunt.co/ 
+- https://fonts.google.com/icons
+- https://colorhunt.co/ 
 
 # NOTAS: 
-- El proyecto contiene bugs en cuanto al movimiento de los objetos, por lo que es indispensable coniderarlo
-- El proyecto es 'responsivo' (entre comillas), ya que muchas cosas se buguean 🐛
+- El proyecto contiene bugs en cuanto al movimiento de los objetos, por lo que mucho cuidado 😓
+- El proyecto es 'responsivo' (entre comillas), ya que muchas cosas se buguean o bien no sirven en móviles 🐛
 - Fue hecho con amor y dedicación, si algo les sirve de aqui, no duden en utilizarlo ❤️
