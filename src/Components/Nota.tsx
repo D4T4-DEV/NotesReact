@@ -145,7 +145,7 @@ const Card: React.FC<CardProps> = ({ id, title, message, type, colorItem, contai
                             padding: 0,
                             backgroundColor: '#FFF',
                         }}
-                        title='Edit note'
+                        title='Editar nota'
                     >
                         <span className="material-symbols-outlined" style={{ fontSize: 18, color: '#000' }}>
                             edit_note
@@ -167,7 +167,7 @@ const Card: React.FC<CardProps> = ({ id, title, message, type, colorItem, contai
                             padding: 0,
                             backgroundColor: "#FFF",
                         }}
-                        title="Delete note"
+                        title="Borrar nota"
                     >
                         <span className="material-symbols-outlined" style={{ fontSize: 18, color: "#000" }}>
                             delete
