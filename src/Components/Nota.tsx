@@ -126,7 +126,7 @@ const Card: React.FC<CardProps> = ({ id, title, message, type, colorItem, contai
                         transform: 'translateX(-50%)',
                         opacity: hover && !isDragging ? 1 : 0,
                         transition: 'opacity 0.3s ease-in-out',
-                        visibility: isColapsedContainer || isDragging ? 'visible' : 'hidden',
+                        visibility: hover || isDragging ? 'visible' : 'hidden',
                         fontSize: '16px',
                         fontFamily: 'Noto Sans, sans-serif',
                     }} title='Título de la nota'>
