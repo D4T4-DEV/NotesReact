@@ -210,8 +210,9 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
                 <span
                   onDoubleClick={handleDoubleClick}
                   style={{ fontSize: '16px', fontWeight: 'bold', cursor: 'pointer' }}
+                  title='Dame doble click para poder editar mi nombre aquí'
                 >
-                  {containerName || 'Nombra el contenedor'}
+                  {containerName || 'Renombrame'}
                 </span>
               )}
             </div>
@@ -262,6 +263,7 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
             </Button>
           </div>
 
+          {/* Modal de confirmación de eliminacion del contenedor */}
           <ConfirmationModal
             open={isDeleteConfirmOpen}
             onClose={cancelRemoveContainer}
