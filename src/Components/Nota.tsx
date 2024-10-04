@@ -116,6 +116,21 @@ const Card: React.FC<CardProps> = ({ id, title, message, type, colorItem, contai
                     >
                         {truncateText(message, 500) || 'No tiene ningún mensaje'}
                     </Typography>
+
+                    <Typography sx={{
+                        position: 'absolute',
+                        width: '100%',
+                        textAlign: 'center',
+                        bottom: '-35px',
+                        left: '50%',
+                        transform: 'translateX(-50%)',
+                        opacity: hover && !isDragging ? 1 : 0,
+                        transition: 'opacity 0.3s ease-in-out',
+                        visibility: isColapsedContainer || isDragging ? 'visible' : 'hidden',
+                        fontSize: '16px',
+                    }} title='Título de la nota'>
+                        {truncateText(title, 15) || 'Sin título'}
+                    </Typography>
                 </CardContent>
 
                 <CardActions
