@@ -72,8 +72,22 @@ export default function ShowNote({ open, onClose, identifyNote }: ShowNoteProps)
                 aria-describedby="child-modal-description"
             >
                 <Box sx={{ ...style, backgroundColor: noteData.colorNote }}>
-                    <Box sx={{ mb: 2, textAlign: 'center' }}>
-                        <Typography id="modal-modal-title" variant="h6" component="h2" sx={{ fontFamily: 'Noto Sans, sans-serif' }}>
+                    <Box sx={{ mt: 1, display: 'flex', justifyContent: 'flex-end' }}>
+                        <Button
+                            sx={{
+                                fontFamily: 'Noto Sans, sans-serif',
+                                padding: 0.5,
+                            }}
+                            onClick={handleClose}
+                            title="Cerrar mostrar nota"
+                        >
+                            <span className="material-symbols-outlined" style={{ color: '#000', fontSize: 35, backgroundColor: '#FFF', borderRadius: '50%', padding: 4 }}>
+                                cancel
+                            </span>
+                        </Button>
+                    </Box>
+                    <Box sx={{ mb: 2.5, textAlign: 'center' }}>
+                        <Typography id="modal-modal-title" variant="h6" component="h2" sx={{ fontFamily: 'Noto Sans, sans-serif', fontSize: 18 }}>
                             Aqui esta tu nota ❤️
                         </Typography>
                     </Box>
@@ -91,7 +105,7 @@ export default function ShowNote({ open, onClose, identifyNote }: ShowNoteProps)
                             fontWeight: 'bolder',
                             marginLeft: '25px'
                         }}
-                        title='Título de la nota'
+                            title='Título de la nota'
                         >
                             {noteData.title}
                         </Typography>
@@ -121,7 +135,7 @@ export default function ShowNote({ open, onClose, identifyNote }: ShowNoteProps)
                             backgroundColor: 'transparent',
                         },
                     }}
-                    title='Mensaje de la nota'
+                        title='Mensaje de la nota'
                     >
                         <Typography sx={{
                             fontFamily: 'Noto Sans, sans-serif',
@@ -131,10 +145,6 @@ export default function ShowNote({ open, onClose, identifyNote }: ShowNoteProps)
                         >
                             {noteData.note}
                         </Typography>
-                    </Box>
-
-                    <Box sx={{ mt: 4, display: 'flex', justifyContent: 'flex-end' }}>
-                        <Button sx={{ fontFamily: 'Noto Sans, sans-serif', backgroundColor: '#FFF' }} onClick={handleClose} title="Cerrar mostrar nota">Cerrar</Button>
                     </Box>
                 </Box>
             </Modal>

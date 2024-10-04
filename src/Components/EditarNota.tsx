@@ -185,10 +185,24 @@ const EditItem: React.FC<EditItemProps> = ({ id, onClose, containerId }) => {
 
                     <Box sx={{ mt: 2, display: 'flex', justifyContent: 'flex-end', fontFamily: 'Noto Sans, sans-serif', fontStyle: 'normal' }}>
                         {/* Al hacer clic en Guardar, se abre el modal de confirmación */}
-                        <Button onClick={isEditing ? handleOpenConfirmation : handleActivateModify} style={{ fontFamily: 'Noto Sans, sans-serif', fontStyle: 'normal' }} title={isEditing ? 'Guardar' : 'Modificar'}>
-                            {isEditing ? 'Guardar' : 'Modificar'}
+                        <Button onClick={isEditing ? handleOpenConfirmation : handleActivateModify} style={{ fontFamily: 'Noto Sans, sans-serif', fontStyle: 'normal', borderRadius: 50 }} title={isEditing ? 'Guardar' : 'Modificar'}>
+                            {isEditing ? (
+                                <span className="material-symbols-outlined">
+                                    save
+                                </span>
+                            ) :
+                                (
+                                    <span className="material-symbols-outlined">
+                                        edit_note
+                                    </span>
+                                )
+                            }
                         </Button>
-                        <Button onClick={handleClose} style={{ fontFamily: 'Noto Sans, sans-serif', fontStyle: 'normal' }} title="Volver">Volver</Button>
+                        <Button onClick={handleClose} style={{ fontFamily: 'Noto Sans, sans-serif', fontStyle: 'normal', borderRadius: 50 }} title="Volver">
+                            <span className="material-symbols-outlined">
+                                cancel
+                            </span>
+                        </Button>
                     </Box>
                 </Box>
             </Modal>
