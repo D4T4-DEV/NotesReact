@@ -1,17 +1,12 @@
 // Colores de las notas 
-export const ColorNotes: string[] =
-    [
-        '#f7941d',
-        '#ffeb3b',
-        '#bc8dbf',
-        '#abd474',
-        '#f49abf',
-        '#6dd0f7',
-        '#ECEE81',
-        '#8DDFCB',
-        '#82A0D8',
-        '#EDB7ED',
-    ];
+export const ColorNotes: string[] = [
+    '#f7941d', '#ffeb3b', '#bc8dbf', '#abd474', '#f49abf', '#6dd0f7', '#ECEE81', '#8DDFCB', '#82A0D8', '#EDB7ED',
+    '#ffadad', '#ffd6a5', '#fdffb6', '#caffbf', '#9bf6ff', '#a0c4ff', '#bdb2ff', '#ffc6ff', '#ff99c8', '#d4a5a5',
+    '#fce7b9', '#d0f4de', '#a3c4bc', '#f2e1c1', '#e4c1f9', '#d3ab9e', '#ffe5b4', '#c9f9cc', '#f0a5a7', '#a0e7e5',
+    '#b4f8c8', '#f39ac7', '#ffdac1', '#ffecb3', '#ffccbc', '#d1c4e9', '#c5cae9', '#bbdefb', '#b2ebf2', '#b2dfdb',
+    '#c8e6c9', '#dcf8c6', '#f1f8e9', '#f3e5f5', '#f8bbd0', '#fff9c4', '#fff8e1', '#fafafa', '#f3e5ab', '#f5e0d3',
+    '#ebd7d7', '#ffccb3', '#ffe0b2', '#ffccbc', '#ffd54f', '#ffe57f', '#ffb74d', '#ff8a65', '#ff6e40', '#ffcc80'
+];
 
 // Conjunto de datos (colores), usados para almacenarse para evitar la repeticion
 const coloresUsados: Set<string> = new Set();
