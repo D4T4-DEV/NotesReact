@@ -47,9 +47,53 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
   const [isOneItemOpen, setIsOneItem] = useState(false);
   const [isDeleteConfirmOpen, setIsDeleteConfirmOpen] = useState(false);
 
+
   // Nuevo estado para manejar el nombre o renombre del contenedor
   const [containerName, setContainerName] = useState(nameContainer || '');
+  const [copyDataContName, setCopyDataContName] = useState('');
   const [isEditing, setIsEditing] = useState(false);
+
+
+  // Modal de confirmacion de querer editar
+  const [isEditConfirmOpen, setIsEditConfirmOpen] = useState(false);
+
+  // Aspectos para la edición del nombre del contenedor
+  const handleBlur = () => {
+    if (copyDataContName !== containerName) {
+      openEditConfirm(); // Abre el modal si el nombre ha cambiado
+    } else {
+      setIsEditing(false);
+    }
+  };
+
+  const confirmEditContainer = () => {
+    setIsEditConfirmOpen(false); // Cierra el modal
+    setIsEditing(false); // Finaliza el modo de edición
+    setCopyDataContName(containerName); // Actualiza el nombre copiado solo después de confirmar
+  };
+
+  const cancelEditContainer = () => {
+    setIsEditConfirmOpen(false); // Cierra el modal
+    setIsEditing(false); // Finaliza el modo de edición
+    setContainerName(copyDataContName);
+  };
+
+  const openEditConfirm = () => {
+    setIsEditConfirmOpen(true); // Abre el modal de confirmación para editar
+  };
+  const handleDoubleClick = () => {
+    setIsEditing(true);
+  };
+
+  const handleChange = (e: { target: { id: string; value: string; }; }) => {
+    const { id, value } = e.target;
+    if (id === 'title-container' && value.length > maxLength) return; // Limitar el título a maxLength caracteres
+    setContainerName(
+      value
+    );
+  };
+
+  // Aspectos para la eliminacion del contenedor
 
   const openDeleteConfirm = () => {
     setIsDeleteConfirmOpen(true);
@@ -78,29 +122,12 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
       if (items.length === 1) {
         setIsOneItem(true);
       }
-      setIsOneItem  (false);
+      setIsOneItem(false);
       setIsCollapsed(true);
     }
   }, [items.length]);
 
   const sortingStrategy = horizontalListSortingStrategy;
-
-  const handleDoubleClick = () => {
-    setIsEditing(true);
-  };
-
-  const handleChange = (e: { target: { id: string; value: string; }; }) => {
-    const { id, value } = e.target;
-    if (id === 'title-container' && value.length > maxLength) return; // Limitar el título a maxLength caracteres
-    setContainerName(
-      value
-    );
-  };
-
-  const handleBlur = () => {
-    setIsEditing(false);
-  };
-
 
   // Medio para poder agregar el estado de 'isModalOpen' existente en el componente Card
   const childrenArray = React.Children.map(children, (child) =>
@@ -242,6 +269,14 @@ const Container: React.FC<ContainerProps> = ({ id, items, type, children, isActi
             description="¿Estás seguro de que deseas eliminar este contenedor? Esta acción no se 
             puede deshacer y todos los elementos dentro del contenedor también serán eliminados 
             (si es que se encuentra alguna nota en este)."
+          />
+
+          {/* Modal de confirmación de edicion */}
+          <ConfirmationModal
+            open={isEditConfirmOpen}
+            onClose={cancelEditContainer}
+            onConfirm={confirmEditContainer}
+            description="¿Estás seguro de querer renombrar el contenedor?"
           />
         </>
       )}
